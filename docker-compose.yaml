@@ -1,0 +1,16 @@
+version: '3.19'
+services:
+  postgres:
+    container_name: postgres
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: routelink
+      POSTGRES_USER: routelink
+      POSTGRES_PASSWORD: routelink
+    ports:
+      - 5432:5432
+    volumes:
+      - db-data:/var/lib/postgresql/data
+volumes:
+  db-data:

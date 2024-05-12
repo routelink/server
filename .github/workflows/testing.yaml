@@ -1,0 +1,60 @@
+name: Testing
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+env:
+  NODE_ENV: test
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_DB: routelink
+          POSTGRES_USER: routelink
+          POSTGRES_PASSWORD: routelink
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Cache node modules
+        id: cache-npm
+        uses: actions/cache@v4
+        env:
+          CACHE_NAME: cache-${{ github.repository }}
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ env.CACHE_NAME }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-${{ env.CACHE_NAME }}-
+            ${{ runner.os }}-npm-
+      - name: Install project
+        run: npm ci
+      - name: Check types
+        run: npm run typecheck
+      - name: Run migrations
+        run: npm run db:migrate
+      - name: Run fixtures
+        run: npm run db:fixtures
+      - name: Testing project
+        run: npm run test
+        env:
+          POSTGRES_DB: routelink
+          POSTGRES_USER: routelink
+          POSTGRES_PASSWORD: routelink

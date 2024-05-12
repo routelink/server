@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "routelink",
+    "password": "routelink",
+    "database": "routelink",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "routelink",
+    "password": "routelink",
+    "database": "routelink",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "routelink",
+    "password": "routelink",
+    "database": "routelink",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
