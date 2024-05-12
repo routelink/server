@@ -19,7 +19,13 @@
 
 ## How to start
 
-To install and connect the RouteLink/server, follow these steps:
+0. Run local PostgreSQL container:
+
+   ```bash
+   docker compose up -d
+   ```
+
+To install and run the RouteLink/server, follow these steps:
 
 1. Clone the repository:
 
