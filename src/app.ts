@@ -22,10 +22,15 @@ export default class App {
       serveClient: false,
     }),
   );
+  corsOptions = {
+    origin: ['http://routelink.ru', 'http://localhost:3000'],
+    credentials: true,
+  };
+
   constructor() {
     this.app.use(morgan('dev'));
     this.app.use(helmet());
-    this.app.use(cors());
+    this.app.use(cors(this.corsOptions));
     this.app.use(express.json());
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: true }));
