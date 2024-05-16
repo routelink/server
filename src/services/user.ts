@@ -11,6 +11,10 @@ export class UserService {
     return await User.findOne({ where: { email: options } });
   }
 
+  async getItemById(id: number): Promise<User | null> {
+    return await User.findOne({ where: { id: id } });
+  }
+
   async create(data: any): Promise<[User, boolean]> {
     const { email, password } = data;
     const hashedPassword = await hash(password, 10);

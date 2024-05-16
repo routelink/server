@@ -65,6 +65,10 @@ class AuthController {
       const user: User | null = await userService.getItem({
         where: { id: refreshToken.userId },
       });
+      const user: User | null = await userService.getItemById(
+        refreshToken.dataValues.userId,
+      );
+
       if (!user) {
         res.cookie('refresh_token', 'deleted', {
           httpOnly: config.cookie.httpOnly,
