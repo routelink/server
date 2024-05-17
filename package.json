@@ -11,7 +11,7 @@
     "test": "vitest run",
     "typecheck": "tsc --noEmit --strict --incremental false --tsBuildInfoFile null --project tsconfig.json",
     "prettier": "prettier -w .",
-    "prepare": "if [ \"$NODE_ENV\" != \"production\" ]; then husky; fi",
+    "prepare": "node prepare.js",
     "db:migrate": "sequelize db:migrate --models-path=src/models",
     "db:fixtures": "sequelize db:seed:all --models-path=src/models"
   },
