@@ -22,3 +22,4 @@ export class Role extends Model {
   @Column(DataType.STRING)
   name!: string;
 }
+export default Role;

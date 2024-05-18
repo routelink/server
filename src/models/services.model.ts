@@ -44,3 +44,4 @@ export class Service extends Model {
   @BelongsTo(() => Transport)
   transport!: Transport;
 }
+export default Service;

@@ -11,7 +11,7 @@
     "test": "vitest run",
     "typecheck": "tsc --noEmit --strict --incremental false --tsBuildInfoFile null --project tsconfig.json",
     "prettier": "prettier -w .",
-    "prepare": "node prepare.js",
+    "prepare": "husky",
     "db:migrate": "sequelize db:migrate --models-path=src/models",
     "db:fixtures": "sequelize db:seed:all --models-path=src/models"
   },
@@ -25,6 +25,7 @@
     "class-validator": "^0.14.1",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "helmet": "^7.1.0",
