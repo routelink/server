@@ -19,13 +19,13 @@ export class Service extends Model {
   @Column(DataType.BIGINT)
   id!: number;
 
-  @IsNotEmpty()
-  @Column(DataType.TEXT)
-  description!: string;
-
   @CreatedAt
   @Column(DataType.DATE)
   createdAt!: Date;
+
+  @IsNotEmpty()
+  @Column(DataType.TEXT)
+  description!: string;
 
   @IsNotEmpty()
   @Column(DataType.BIGINT)

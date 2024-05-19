@@ -6,6 +6,7 @@ import {
   Table,
   PrimaryKey,
   AutoIncrement,
+  CreatedAt,
 } from 'sequelize-typescript';
 
 import { IsNotEmpty } from 'class-validator';
@@ -18,6 +19,10 @@ export class Org extends Model {
   @AutoIncrement
   @Column(DataType.BIGINT)
   id!: number;
+
+  @CreatedAt
+  @Column(DataType.DATE)
+  createdAt!: Date;
 
   @IsNotEmpty()
   @Column(DataType.STRING)

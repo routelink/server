@@ -24,6 +24,10 @@ export class MyUser extends Model {
   @Column(DataType.BIGINT)
   id!: number;
 
+  @CreatedAt
+  @Column(DataType.DATE)
+  createdAt!: Date;
+
   @IsNotEmpty()
   @Column({ type: DataType.STRING, unique: true })
   name!: string;
@@ -39,10 +43,6 @@ export class MyUser extends Model {
   @IsNotEmpty()
   @Column(DataType.STRING)
   password!: string;
-
-  @CreatedAt
-  @Column(DataType.DATE)
-  createdAt!: Date;
 
   @HasMany(() => Insure)
   insures!: Insure[];
