@@ -8,3 +8,4 @@ export * from './config';
 export * from './collection';
 export * from './user.model';
 export * from './refresh-token.model';
+export * from './orgs.model';
