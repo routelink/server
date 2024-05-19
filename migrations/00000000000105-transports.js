@@ -20,6 +20,7 @@ module.exports = {
       reg_number: {
         type: Sequelize.STRING,
         allowNull: false,
+        unique: true,
       },
       avg_consumption: {
         type: Sequelize.BIGINT,
