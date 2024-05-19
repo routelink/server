@@ -13,7 +13,7 @@ module.exports = {
       },
       {
         name: 'Org 2 Car 1',
-        reg_number: 'o 111 oo',
+        reg_number: 'o 222 oo',
         unit: 'liters',
         type_id: '1',
         org_id: '2',
