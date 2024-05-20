@@ -103,7 +103,6 @@ class AuthController {
     res.cookie('refresh_token', refreshToken.token, {
       httpOnly: config.cookie.httpOnly,
       secure: config.cookie.secure,
-      domain: 'localhost:3000',
       sameSite: config.cookie.sameSite,
       path: config.cookie.path,
       expires: refreshToken.valid,
