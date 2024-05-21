@@ -23,7 +23,7 @@ export default class App {
     }),
   );
   corsOptions = {
-    origin: ['http://routelink.ru', 'http://localhost:3000'],
+    origin: ['https://routelink.ru', 'http://localhost:3000'],
     credentials: true,
   };
 

@@ -25,8 +25,11 @@ export class Metrics extends Model {
   @Column(DataType.BIGINT)
   userId!: number;
 
+  /* TODO : FIX THIS. Because it's transport id in insusers table   */
   @Column(DataType.STRING)
   transportId!: number;
+
+  /* TODO: Add insusers table  */
 
   @CreatedAt
   @Expose()

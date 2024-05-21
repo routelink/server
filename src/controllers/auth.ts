@@ -62,9 +62,7 @@ class AuthController {
           .json({ status: AUTH.INVALID_REFRESH_TOKEN, message: 'Invalid refresh token' });
       }
 
-      const user: User | null = await userService.getItemById(
-        refreshToken.dataValues.userId,
-      );
+      const user: User | null = await userService.getItemById(refreshToken.userId);
 
       if (!user) {
         res.cookie('refresh_token', 'deleted', {
