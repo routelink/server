@@ -1,7 +1,10 @@
 import { IConfig } from './config';
 import dotenv from 'dotenv';
+import fs from 'fs';
 
-dotenv.config({ path: '.env.local' || '.env' });
+const envPath = fs.existsSync('.env.local') ? '.env.local' : '.env';
+
+dotenv.config({ path: envPath });
 
 export const config: IConfig = {
   host: process.env.HOST || 'localhost',
