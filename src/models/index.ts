@@ -15,4 +15,3 @@ export * from './roles.model';
 export * from './services.model';
 export * from './transports.model';
 export * from './types.model';
-export * from './userrole.model';
