@@ -1,32 +1,32 @@
 import { NextFunction, Request, Response } from 'express';
+import { TransportService } from '@app/services/transport';
+import { GetTransportsPayload, ITransport } from '@app/types';
 
 type RequestWithBody<T> = Request<{}, {}, T>;
-type RequestWithQuery<T> = Request<{}, {}, {}, T>;
+// type RequestWithQuery<T> = Request<{}, {}, {}, T>;
 // type RequestWithParams<T> = Request<T>
 
-type GetRequest = {
-  page: number;
-  count: number;
-};
-type AddRequest = {
-  data: any;
-};
-
 class TransportsController {
-  async get(req: RequestWithQuery<GetRequest>, res: Response, next: NextFunction) {
+  async items(
+    req: RequestWithBody<GetTransportsPayload>,
+    res: Response,
+    next: NextFunction,
+  ) {
     try {
-      const { page = 1, count = 10 } = req.query;
+      const transportService = new TransportService();
+      const rows = await transportService.getItems(req.body);
 
-      res.json({ page, count });
+      res.json({ rows });
     } catch (e) {
       next(e);
     }
   }
 
-  async add(req: RequestWithBody<AddRequest>, res: Response, next: NextFunction) {
+  async add(req: RequestWithBody<ITransport>, res: Response, next: NextFunction) {
     try {
-      const { data } = req.body;
-      res.json(data);
+      const transportService = new TransportService();
+      await transportService.addTransport(req.body);
+      res.status(200).json({ response: 'ok' });
     } catch (e) {
       next(e);
       //res.status(401).json({ status: AUTH.REFRESH_ERROR, message: 'Error refresh token' });

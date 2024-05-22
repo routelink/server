@@ -7,4 +7,7 @@ export * from './response';
 export * from './config';
 export * from './collection';
 export * from './user.model';
+export * from './transports.model';
+export * from './orgs.model';
+export * from './types.model';
 export * from './refresh-token.model';
