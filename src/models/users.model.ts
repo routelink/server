@@ -14,6 +14,7 @@ import { Exclude, Expose } from 'class-transformer';
 import { IsNotEmpty } from 'class-validator';
 import { RefreshToken } from './refresh-token.model';
 import Org from './orgs.model';
+import Role from './roles.model';
 
 @Table({ tableName: 'users' })
 export class User extends Model {
@@ -50,6 +51,10 @@ export class User extends Model {
 
   @BelongsTo(() => Org)
   org!: Org;
+
+  @ForeignKey(() => Role)
+  @Column(DataType.INTEGER)
+  role_id!: number;
 
   @HasMany(() => RefreshToken)
   refreshTokens!: RefreshToken[];
