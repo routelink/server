@@ -6,5 +6,6 @@ import { Validation } from '@app/middlewares';
 const router = Router();
 router.route('/login').post(Validation.req(Credentials, ['write']), authController.login);
 router.route('/refresh').post(authController.refresh);
+router.route('/logout').post(authController.logout);
 
 export default router;
