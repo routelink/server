@@ -12,7 +12,7 @@ import Transport from './transports.model';
 import { User } from './users.model';
 
 @Table({ tableName: 'metrics' })
-export default class Metric extends Model {
+export class Metric extends Model {
   @PrimaryKey
   @AutoIncrement
   @Column(DataType.INTEGER)

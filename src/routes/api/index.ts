@@ -1,5 +1,10 @@
 import { Router } from 'express';
-import { getTransportWithUserCount } from '@app/controllers/analytics/insures';
+import analyticsRoutes from './analytics';
+import roueteOrgs from './orgs';
+
 const router = Router();
-router.get('/insures/user-count', getTransportWithUserCount);
+
+router.use('/orgs', roueteOrgs);
+router.use('/analytics', analyticsRoutes);
+
 export default router;

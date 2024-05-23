@@ -8,7 +8,7 @@ import {
 } from 'sequelize-typescript';
 
 @Table({ tableName: 'orgs' })
-export default class Org extends Model {
+export class Org extends Model {
   @PrimaryKey
   @AutoIncrement
   @Column(DataType.INTEGER)

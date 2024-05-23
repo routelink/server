@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { fn, col } from 'sequelize';
-import Insure from '../../models/insures.model';
+import { Insure } from '@app/models';
 
 export const getTransportWithUserCount = async (_req: Request, res: Response) => {
   try {

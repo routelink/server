@@ -13,8 +13,9 @@ import {
 import { Exclude, Expose } from 'class-transformer';
 import { IsNotEmpty } from 'class-validator';
 import { RefreshToken } from './refresh-token.model';
-import Org from './orgs.model';
-import Role from './roles.model';
+import { Org } from './orgs.model';
+import { Role } from './roles.model';
+import { Metric } from './metrics.model';
 
 @Table({ tableName: 'users' })
 export class User extends Model {
@@ -58,5 +59,8 @@ export class User extends Model {
 
   @HasMany(() => RefreshToken)
   refreshTokens!: RefreshToken[];
+
+  @HasMany(() => Metric)
+  metrics!: Metric[];
 }
 export default User;
