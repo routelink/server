@@ -76,7 +76,7 @@ See our [CONTRIBUTING.md](https://github.com/routelink/.github/blob/main/CONTRIB
                     src="https://github.com/TheKenkei.png?size=200"
                     width="100"
                     style="margin-bottom: -4px; border-radius: 8px;"
-                    alt="Oleg Novikov"
+                    alt="Vitaliy Novikov"
                 /><br /><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vitaliy&nbsp;Novikov&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></a
             >
             <div style="margin-top: 4px">
@@ -93,7 +93,7 @@ See our [CONTRIBUTING.md](https://github.com/routelink/.github/blob/main/CONTRIB
                     src="https://github.com/Sableuze.png?size=200"
                     width="100"
                     style="margin-bottom: -4px; border-radius: 8px;"
-                    alt="Oleg Novikov"
+                    alt="Ravil Garaev"
                 /><br /><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ravil&nbsp;Garaev&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></a
             >
             <div style="margin-top: 4px">
@@ -110,7 +110,7 @@ See our [CONTRIBUTING.md](https://github.com/routelink/.github/blob/main/CONTRIB
                     src="https://github.com/JSFSchaikaai.png?size=200"
                     width="100"
                     style="margin-bottom: -4px; border-radius: 8px;"
-                    alt="Oleg Novikov"
+                    alt="Andrei Chaika"
                     /><br /><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Andrei&nbsp;Chaika&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></a
             >
             <div style="margin-top: 4px">
@@ -129,7 +129,7 @@ See our [CONTRIBUTING.md](https://github.com/routelink/.github/blob/main/CONTRIB
                     src="https://github.com/alexander-barmin.png?size=200"
                     width="100"
                     style="margin-bottom: -4px; border-radius: 8px;"
-                    alt="Oleg Novikov"
+                    alt="Alexander Barmin"
                 /><br /><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alexander &nbsp;Barmin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></a
             >
             <div style="margin-top: 4px">
@@ -146,7 +146,7 @@ See our [CONTRIBUTING.md](https://github.com/routelink/.github/blob/main/CONTRIB
                     src="https://github.com/kirill-k939.png?size=200"
                     width="100"
                     style="margin-bottom: -4px; border-radius: 8px;"
-                    alt="Oleg Novikov"
+                    alt="Kirill Muzukin"
                 /><br /><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Kirill&nbsp;Muzukin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></a
             >
             <div style="margin-top: 4px">
@@ -163,7 +163,7 @@ See our [CONTRIBUTING.md](https://github.com/routelink/.github/blob/main/CONTRIB
                     src="https://github.com/SaintCAF.png?size=200"
                     width="100"
                     style="margin-bottom: -4px; border-radius: 8px;"
-                    alt="Oleg Novikov"
+                    alt="Anton Terentyev"
                 /><br /><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Anton&nbsp;Terentyev&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></a
             >
             <div style="margin-top: 4px">
@@ -180,11 +180,28 @@ See our [CONTRIBUTING.md](https://github.com/routelink/.github/blob/main/CONTRIB
                     src="https://github.com/alextsiklis.png?size=200"
                     width="100"
                     style="margin-bottom: -4px; border-radius: 8px;"
-                    alt="Oleg Novikov"
+                    alt="Alexander Tsiklis"
                 /><br /><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alexander&nbsp;Tsiklis&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></a
             >
             <div style="margin-top: 4px">
                 <a href="https://github.com/alextsiklis" title="Github"
+                    ><img
+                        width="16"
+                        src="https://raw.githubusercontent.com/MarsiBarsi/readme-icons/main/github.svg"
+                /></a>
+            </div>
+        </td>
+        <td align="center">
+            <a href="https://github.com/ekaterina-pa"
+                ><img
+                    src="https://github.com/ekaterina-pa.png?size=200"
+                    width="100"
+                    style="margin-bottom: -4px; border-radius: 8px;"
+                    alt="Ekaterina Pavlova"
+                /><br /><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ekaterina&nbsp;Pavlova&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></a
+            >
+            <div style="margin-top: 4px">
+                <a href="https://github.com/ekaterina-pa" title="Github"
                     ><img
                         width="16"
                         src="https://raw.githubusercontent.com/MarsiBarsi/readme-icons/main/github.svg"
