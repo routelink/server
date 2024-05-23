@@ -3,30 +3,21 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('transports', {
+    await queryInterface.createTable('employees', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      name: {
+      fullname: {
         type: Sequelize.STRING,
       },
-      orgId: {
+      roleId: {
         type: Sequelize.INTEGER,
       },
-      typeId: {
+      transportId: {
         type: Sequelize.INTEGER,
-      },
-      regNumber: {
-        type: Sequelize.STRING,
-      },
-      avgConsumption: {
-        type: Sequelize.STRING,
-      },
-      unit: {
-        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,
@@ -40,5 +31,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('transports');
+    await queryInterface.dropTable('employees');
   },
+};

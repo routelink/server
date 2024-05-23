@@ -1,13 +1,15 @@
 import {
-  DataType,
-  Model,
-  Column,
-  ForeignKey,
-  Table,
   AutoIncrement,
+  Column,
+  DataType,
+  ForeignKey,
+  Model,
   PrimaryKey,
+  Table,
 } from 'sequelize-typescript';
+
 import { config } from '@app/models';
+
 import { User } from './user.model';
 
 @Table({ tableName: 'refresh_tokens' })

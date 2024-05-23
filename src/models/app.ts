@@ -2,6 +2,7 @@ import { IConfig } from './config';
 import dotenv from 'dotenv';
 
 dotenv.config();
+dotenv.config({ path: `.env.local`, override: true });
 
 export const config: IConfig = {
   host: process.env.HOST || 'localhost',
@@ -15,7 +16,7 @@ export const config: IConfig = {
     enabled: true,
     sameSite: 'lax',
     path: '/auth',
-    domain: null,
+    domain: 'localhost',
     httpOnly: 'production' === process.env.NODE_ENV,
     secure: 'production' === process.env.NODE_ENV,
     removeTokenFromBody: true,

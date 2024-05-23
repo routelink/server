@@ -1,16 +1,22 @@
-import {
-  DataType,
-  Model,
-  Column,
-  HasMany,
-  Table,
-  PrimaryKey,
-  AutoIncrement,
-  CreatedAt,
-} from 'sequelize-typescript';
 import { Exclude, Expose } from 'class-transformer';
 import { IsNotEmpty } from 'class-validator';
+import {
+  AutoIncrement,
+  BelongsTo,
+  Column,
+  CreatedAt,
+  DataType,
+  ForeignKey,
+  HasMany,
+  Model,
+  PrimaryKey,
+  Table,
+} from 'sequelize-typescript';
+
+import { Metrica } from './metrica.model';
+import { Organization } from './organization.model';
 import { RefreshToken } from './refresh-token.model';
+import { Role } from './role.model';
 
 @Table({ tableName: 'users' })
 export class User extends Model {
@@ -18,23 +24,18 @@ export class User extends Model {
   @AutoIncrement
   @Expose({ groups: ['read'] })
   @Exclude()
-  @Column(DataType.BIGINT)
+  @Column(DataType.INTEGER)
   id!: number;
 
   @Expose()
   @IsNotEmpty()
   @Column(DataType.STRING)
-  name!: string;
+  username!: string;
 
   @Expose()
   @IsNotEmpty()
   @Column({ type: DataType.STRING, unique: true })
   email!: string;
-
-  @Expose()
-  @IsNotEmpty()
-  @Column({ type: DataType.STRING, unique: true })
-  username!: string;
 
   @Exclude({ toPlainOnly: true })
   @IsNotEmpty({ groups: ['write'] })
@@ -46,6 +47,21 @@ export class User extends Model {
   @Column(DataType.DATE)
   createdAt!: Date;
 
+  @ForeignKey(() => Organization)
+  @Column(DataType.INTEGER)
+  org_id!: number;
+
+  @BelongsTo(() => Organization)
+  org!: Organization;
+
+  @ForeignKey(() => Role)
+  @Column(DataType.INTEGER)
+  role_id!: number;
+
   @HasMany(() => RefreshToken)
   refreshTokens!: RefreshToken[];
+
+  @HasMany(() => Metrica)
+  metrics!: Metrica[];
 }
+export default User;
