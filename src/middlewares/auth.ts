@@ -37,7 +37,9 @@ export class Auth {
       async (_: Request, payload: any, done: VerifiedCallback) => {
         try {
           const userService = new UserService();
-          const user: User | null = await userService.getItem(payload.email);
+          const user: User | null = await userService.getItem({
+            where: { email: payload.email },
+          });
           if (!user) {
             return done(null, false);
           }

@@ -1,8 +1,9 @@
 import { NextFunction, Request, Response } from 'express';
-import { User, RefreshToken } from '@app/models';
+
+import { RefreshToken, User } from '@app/models';
 import { AUTH } from '@app/models';
-import { UserService, AuthService } from '@app/services';
 import { config } from '@app/models';
+import { AuthService, UserService } from '@app/services';
 
 class AuthController {
   async login(req: Request, res: Response, next: NextFunction) {
@@ -10,8 +11,7 @@ class AuthController {
       const userService = new UserService();
       const authService = new AuthService();
       const { email, password } = req.body;
-      const user: User | null = await userService.getItem(email);
-
+      const user: User | null = await userService.getItem({ where: { email: email } });
       if (!user) {
         return res.status(401).json({
           status: AUTH.INVALID_CREDENTIALS,
