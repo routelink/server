@@ -38,4 +38,3 @@ export class Transport extends Model {
   @Column(DataType.STRING)
   unit!: string;
 }
-export default Transport;
