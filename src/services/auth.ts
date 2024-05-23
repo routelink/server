@@ -30,4 +30,8 @@ export class AuthService {
 
     return { token: token, refreshToken: refreshToken };
   }
+
+  async removeRefreshToken(options: FindOptions): Promise<number> {
+    return await RefreshToken.destroy(options);
+  }
 }

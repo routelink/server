@@ -7,10 +7,15 @@ import {
   PrimaryKey,
   AutoIncrement,
   CreatedAt,
+  ForeignKey,
+  BelongsTo,
 } from 'sequelize-typescript';
 import { Exclude, Expose } from 'class-transformer';
 import { IsNotEmpty } from 'class-validator';
 import { RefreshToken } from './refresh-token.model';
+import { Org } from './orgs.model';
+import { Role } from './roles.model';
+import { Metric } from './metrics.model';
 
 @Table({ tableName: 'users' })
 export class User extends Model {
@@ -18,23 +23,18 @@ export class User extends Model {
   @AutoIncrement
   @Expose({ groups: ['read'] })
   @Exclude()
-  @Column(DataType.BIGINT)
+  @Column(DataType.INTEGER)
   id!: number;
 
   @Expose()
   @IsNotEmpty()
   @Column(DataType.STRING)
-  name!: string;
+  username!: string;
 
   @Expose()
   @IsNotEmpty()
   @Column({ type: DataType.STRING, unique: true })
   email!: string;
-
-  @Expose()
-  @IsNotEmpty()
-  @Column({ type: DataType.STRING, unique: true })
-  username!: string;
 
   @Exclude({ toPlainOnly: true })
   @IsNotEmpty({ groups: ['write'] })
@@ -46,6 +46,21 @@ export class User extends Model {
   @Column(DataType.DATE)
   createdAt!: Date;
 
+  @ForeignKey(() => Org)
+  @Column(DataType.INTEGER)
+  org_id!: number;
+
+  @BelongsTo(() => Org)
+  org!: Org;
+
+  @ForeignKey(() => Role)
+  @Column(DataType.INTEGER)
+  role_id!: number;
+
   @HasMany(() => RefreshToken)
   refreshTokens!: RefreshToken[];
+
+  @HasMany(() => Metric)
+  metrics!: Metric[];
 }
+export default User;
