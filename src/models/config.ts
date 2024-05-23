@@ -5,7 +5,7 @@ export interface Cookie {
   enabled: boolean;
   sameSite: SameSite;
   path: string;
-  domain: string | null;
+  domain: string;
   httpOnly: boolean;
   secure: boolean;
   removeTokenFromBody: boolean;

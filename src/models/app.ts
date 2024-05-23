@@ -15,7 +15,7 @@ export const config: IConfig = {
     enabled: true,
     sameSite: 'lax',
     path: '/auth',
-    domain: null,
+    domain: 'localhost',
     httpOnly: 'production' === process.env.NODE_ENV,
     secure: 'production' === process.env.NODE_ENV,
     removeTokenFromBody: true,

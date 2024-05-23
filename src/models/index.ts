@@ -1,5 +1,6 @@
 export * from './app';
 export * from './auth';
+export * from './cache';
 export * from './credentials';
 export * from './database';
 export * from './error';
@@ -9,3 +10,4 @@ export * from './collection';
 export * from './user.model';
 export * from './refresh-token.model';
 export * from './orgs.model';
+export * from './metrics.model';
