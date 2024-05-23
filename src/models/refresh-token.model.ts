@@ -8,7 +8,7 @@ import {
   PrimaryKey,
 } from 'sequelize-typescript';
 import { config } from '@app/models';
-import { User } from './user.model';
+import { User } from './users.model';
 
 @Table({ tableName: 'refresh_tokens' })
 export class RefreshToken extends Model {
