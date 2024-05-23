@@ -128,6 +128,26 @@ class AuthController {
       next(e);
     }
   }
+  async logoutAll(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.user as { id: string };
+
+      const authService = new AuthService();
+      await authService.removeRefreshToken({
+        where: { userId: id },
+      });
+      res.cookie('refresh_token', 'deleted', {
+        httpOnly: config.cookie.httpOnly,
+        secure: config.cookie.secure,
+        sameSite: config.cookie.sameSite,
+        path: config.cookie.path,
+      });
+      res.clearCookie('refresh_token');
+      return res.status(200).json({ status: 200, message: 'Logout successful' });
+    } catch (e) {
+      next(e);
+    }
+  }
 }
 
 const authController = new AuthController();
