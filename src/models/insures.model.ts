@@ -12,7 +12,7 @@ import Transport from './transports.model';
 import { User } from './users.model';
 
 @Table({ tableName: 'insures' })
-export default class Insure extends Model {
+export class Insure extends Model {
   @PrimaryKey
   @AutoIncrement
   @Column(DataType.INTEGER)
@@ -33,3 +33,4 @@ export default class Insure extends Model {
   @Column(DataType.BOOLEAN)
   isUser!: boolean;
 }
+export default Insure;
