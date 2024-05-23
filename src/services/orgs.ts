@@ -1,32 +1,32 @@
-import { Org } from '@app/models';
-
 import { FindOptions } from 'sequelize';
 
+import { Organization } from '@app/models';
+
 export class OrgsService {
-  async getCollection(options?: FindOptions): Promise<Org[]> {
-    return await Org.findAll(options);
+  async getCollection(options?: FindOptions): Promise<Organization[]> {
+    return await Organization.findAll(options);
   }
 
-  async getItem(id: string): Promise<Org | null> {
-    return await Org.findOne({ where: { id: id } });
+  async getItem(id: string): Promise<Organization | null> {
+    return await Organization.findOne({ where: { id: id } });
   }
 
-  async create(data: any): Promise<[Org, boolean]> {
+  async create(data: any): Promise<[Organization, boolean]> {
     const { name } = data;
-    const [org, created] = await Org.findOrCreate({
+    const [org, created] = await Organization.findOrCreate({
       where: { name: name },
       defaults: { name: name, createdAt: new Date() },
     });
-    return [org, created] as [Org, boolean];
+    return [org, created] as [Organization, boolean];
   }
 
   async update(id: string, data: any) {
     const { name } = data;
-    const updated = await Org.update({ name: name }, { where: { id: id } });
+    const updated = await Organization.update({ name: name }, { where: { id: id } });
     return updated;
   }
 
   async remove(id: string): Promise<number> {
-    return await Org.destroy({ where: { id: id } });
+    return await Organization.destroy({ where: { id: id } });
   }
 }

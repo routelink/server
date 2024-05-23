@@ -1,17 +1,18 @@
-import {
-  DataType,
-  Model,
-  Column,
-  Table,
-  PrimaryKey,
-  AutoIncrement,
-  CreatedAt,
-  ForeignKey,
-  BelongsTo,
-} from 'sequelize-typescript';
 import { Expose } from 'class-transformer';
 import { IsNotEmpty } from 'class-validator';
-import { Transport } from './transports.model';
+import {
+  AutoIncrement,
+  BelongsTo,
+  Column,
+  CreatedAt,
+  DataType,
+  ForeignKey,
+  Model,
+  PrimaryKey,
+  Table,
+} from 'sequelize-typescript';
+
+import { Transport } from './transport.model';
 
 @Table({ tableName: 'services' })
 export class Service extends Model {

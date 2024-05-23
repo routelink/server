@@ -1,14 +1,14 @@
 import {
-  Table,
-  Model,
+  AutoIncrement,
   Column,
   DataType,
+  Model,
   PrimaryKey,
-  AutoIncrement,
+  Table,
 } from 'sequelize-typescript';
 
-@Table({ tableName: 'types' })
-export default class Type extends Model {
+@Table({ tableName: 'organizations' })
+export class Organization extends Model {
   @PrimaryKey
   @AutoIncrement
   @Column(DataType.INTEGER)
@@ -16,7 +16,4 @@ export default class Type extends Model {
 
   @Column(DataType.STRING)
   name!: string;
-
-  @Column(DataType.STRING)
-  image!: string;
 }
