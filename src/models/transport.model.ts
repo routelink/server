@@ -1,14 +1,15 @@
 import {
-  Table,
-  Model,
+  AutoIncrement,
   Column,
   DataType,
-  PrimaryKey,
-  AutoIncrement,
   ForeignKey,
+  Model,
+  PrimaryKey,
+  Table,
 } from 'sequelize-typescript';
-import { Org } from './orgs.model';
-import Type from './types.model';
+
+import { Organization } from './organization.model';
+import { Type } from './type.model';
 
 @Table({ tableName: 'transports' })
 export class Transport extends Model {
@@ -20,7 +21,7 @@ export class Transport extends Model {
   @Column(DataType.STRING)
   name!: string;
 
-  @ForeignKey(() => Org)
+  @ForeignKey(() => Organization)
   @Column(DataType.INTEGER)
   orgId!: number;
 

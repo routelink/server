@@ -1,21 +1,22 @@
-import {
-  DataType,
-  Model,
-  Column,
-  HasMany,
-  Table,
-  PrimaryKey,
-  AutoIncrement,
-  CreatedAt,
-  ForeignKey,
-  BelongsTo,
-} from 'sequelize-typescript';
 import { Exclude, Expose } from 'class-transformer';
 import { IsNotEmpty } from 'class-validator';
+import {
+  AutoIncrement,
+  BelongsTo,
+  Column,
+  CreatedAt,
+  DataType,
+  ForeignKey,
+  HasMany,
+  Model,
+  PrimaryKey,
+  Table,
+} from 'sequelize-typescript';
+
+import { Metrica } from './metrica.model';
+import { Organization } from './organization.model';
 import { RefreshToken } from './refresh-token.model';
-import { Org } from './orgs.model';
-import { Role } from './roles.model';
-import { Metric } from './metrics.model';
+import { Role } from './role.model';
 
 @Table({ tableName: 'users' })
 export class User extends Model {
@@ -46,12 +47,12 @@ export class User extends Model {
   @Column(DataType.DATE)
   createdAt!: Date;
 
-  @ForeignKey(() => Org)
+  @ForeignKey(() => Organization)
   @Column(DataType.INTEGER)
   org_id!: number;
 
-  @BelongsTo(() => Org)
-  org!: Org;
+  @BelongsTo(() => Organization)
+  org!: Organization;
 
   @ForeignKey(() => Role)
   @Column(DataType.INTEGER)
@@ -60,7 +61,7 @@ export class User extends Model {
   @HasMany(() => RefreshToken)
   refreshTokens!: RefreshToken[];
 
-  @HasMany(() => Metric)
-  metrics!: Metric[];
+  @HasMany(() => Metrica)
+  metrics!: Metrica[];
 }
 export default User;

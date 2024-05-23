@@ -1,18 +1,19 @@
 import {
-  Table,
-  Model,
+  AutoIncrement,
   Column,
+  CreatedAt,
   DataType,
   ForeignKey,
+  Model,
   PrimaryKey,
-  AutoIncrement,
-  CreatedAt,
+  Table,
 } from 'sequelize-typescript';
-import Transport from './transports.model';
-import { User } from './users.model';
+
+import { Transport } from './transport.model';
+import { User } from './user.model';
 
 @Table({ tableName: 'metrics' })
-export class Metric extends Model {
+export class Metrica extends Model {
   @PrimaryKey
   @AutoIncrement
   @Column(DataType.INTEGER)

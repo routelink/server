@@ -1,15 +1,16 @@
 import {
-  Table,
-  Model,
-  Column,
-  DataType,
-  PrimaryKey,
   AutoIncrement,
-  ForeignKey,
+  Column,
   CreatedAt,
+  DataType,
+  ForeignKey,
+  Model,
+  PrimaryKey,
+  Table,
 } from 'sequelize-typescript';
-import Transport from './transports.model';
-import { User } from './users.model';
+
+import { Transport } from './transport.model';
+import { User } from './user.model';
 
 @Table({ tableName: 'insures' })
 export class Insure extends Model {

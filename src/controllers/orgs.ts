@@ -1,12 +1,13 @@
 import { NextFunction, Request, Response } from 'express';
-import { Org } from '@app/models';
+
+import { Organization } from '@app/models';
 import { OrgsService } from '@app/services';
 
 class OrgsController {
   async list(_: Request, res: Response, next: NextFunction) {
     try {
       const orgsService = new OrgsService();
-      const orgs: Org[] | null = await orgsService.getCollection();
+      const orgs: Organization[] | null = await orgsService.getCollection();
 
       if (!orgs) {
         return res.status(404).json({});
@@ -26,7 +27,7 @@ class OrgsController {
         return res.status(400).json({ message: 'bad params' });
       }
 
-      const org: Org | null = await orgsService.getItem(id);
+      const org: Organization | null = await orgsService.getItem(id);
 
       if (!org) {
         return res.status(404).json({});

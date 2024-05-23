@@ -8,7 +8,9 @@
   "tabWidth": 2,
   "endOfLine": "auto",
   "arrowParens": "always",
-  "plugins": ["@trivago/prettier-plugin-sort-imports"],
+  "plugins": [
+    "@trivago/prettier-plugin-sort-imports"
+  ],
   "importOrder": [
     "^@app/(.*)$",
     "^@app/controllers(.*)$",
@@ -17,6 +19,11 @@
     "^@app/routes(.*)$",
     "^@app/services(.*)$",
     "^[./]"
+  ],
+  "importOrderParserPlugins": [
+    "typescript",
+    "jsx",
+    "decorators"
   ],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true
