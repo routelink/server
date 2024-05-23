@@ -62,9 +62,8 @@ class AuthController {
           .json({ status: AUTH.INVALID_REFRESH_TOKEN, message: 'Invalid refresh token' });
       }
 
-      const user: User | null = await userService.getItem({
-        where: { id: refreshToken.userId },
-      });
+      const user: User | null = await userService.getItemById(refreshToken.userId);
+
       if (!user) {
         res.cookie('refresh_token', 'deleted', {
           httpOnly: config.cookie.httpOnly,
@@ -108,6 +107,46 @@ class AuthController {
     });
 
     return res.json({ token: token });
+  }
+
+  async logout(req: Request, res: Response, next: NextFunction) {
+    try {
+      const token = req.cookies[config.cookie.name];
+      const authService = new AuthService();
+      await authService.removeRefreshToken({
+        where: { token: token },
+      });
+      res.cookie('refresh_token', 'deleted', {
+        httpOnly: config.cookie.httpOnly,
+        secure: config.cookie.secure,
+        sameSite: config.cookie.sameSite,
+        path: config.cookie.path,
+      });
+      res.clearCookie('refresh_token');
+      return res.status(200).json({ status: 200, message: 'Logout successful' });
+    } catch (e) {
+      next(e);
+    }
+  }
+  async logoutAll(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.user as { id: string };
+
+      const authService = new AuthService();
+      await authService.removeRefreshToken({
+        where: { userId: id },
+      });
+      res.cookie('refresh_token', 'deleted', {
+        httpOnly: config.cookie.httpOnly,
+        secure: config.cookie.secure,
+        sameSite: config.cookie.sameSite,
+        path: config.cookie.path,
+      });
+      res.clearCookie('refresh_token');
+      return res.status(200).json({ status: 200, message: 'Logout successful' });
+    } catch (e) {
+      next(e);
+    }
   }
 }
 

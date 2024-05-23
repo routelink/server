@@ -1,4 +1,5 @@
 import { Server, Socket } from 'socket.io';
+import { MetricsWsService } from '@app/services/websockets';
 
 export class WsService {
   private _socket: Socket | null = null;
@@ -6,10 +7,8 @@ export class WsService {
   constructor(private readonly io: Server) {
     this.io.on('connection', (socket: Socket) => {
       this._socket = socket;
+      this.initServices();
       console.log('new client connected:', socket.id);
-      this._socket.on('disconnect', () => {
-        console.log('client disconnected:', socket.id);
-      });
     });
   }
 
@@ -19,5 +18,9 @@ export class WsService {
 
   get socket(): Socket | null {
     return this._socket;
+  }
+
+  initServices() {
+    new MetricsWsService(this.socket!);
   }
 }
