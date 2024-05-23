@@ -10,7 +10,7 @@ import {
 } from 'sequelize-typescript';
 import { Exclude, Expose } from 'class-transformer';
 import { IsNotEmpty } from 'class-validator';
-import Role from './roles.model';
+import { Roles } from './roles.model';
 import { Transport } from './transport.model'
 
 @Table({ tableName: 'employees' })
@@ -27,18 +27,11 @@ export class Employee extends Model {
     @Column(DataType.STRING)
     fullname!: string;
 
-    // @Expose()
-    // @IsNotEmpty()
-    // @Column(DataType.STRING)
-    // surname!: string;
-
-    @Expose()
-    @ForeignKey(() => Role)
+    @ForeignKey(() => Roles)
     @IsNotEmpty()
     @Column(DataType.BIGINT)
     roleId!: number;
 
-    @Expose()
     @ForeignKey(() => Transport)
     @Column(DataType.BIGINT)
     transportId!: number;
