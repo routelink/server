@@ -26,12 +26,16 @@ export class UserService {
   async update(id: string | number, options: any): Promise<User | null | Json> {
     const { password, currentPassword } = options;
     const user: User | null = await User.findOne({ where: { id: id } });
-    if (!user) throw new Error('User not found');
+    if (!user) {
+      throw new Error('User not found');
+    }
     if (password && currentPassword) {
       const authService = new AuthService();
       if (await authService.compare(currentPassword, user.password)) {
         options.password = await hash(password, 10);
-      } else throw new Error('Invalid current password');
+      } else {
+        throw new Error('Invalid current password');
+      }
     }
     await User.update({ ...options }, { where: { id: id } });
     return await User.findOne({ where: { id: id } });

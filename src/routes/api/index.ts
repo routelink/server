@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import profile from '@app/routes/api/profile';
+import profile from './profile';
 
 const router = Router();
 

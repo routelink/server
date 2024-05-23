@@ -9,11 +9,10 @@ class ProfileController {
       const { id } = req.user as { id: number };
       const userService = new UserService();
       const user: User | null = await userService.getItem({ where: { id: id } });
-      return res.json({
-        name: user?.name,
-        email: user?.email,
-        id: user?.id,
-      });
+      if (!user) {
+        res.status(404);
+      }
+      return user;
     } catch (e) {
       next(e);
     }
