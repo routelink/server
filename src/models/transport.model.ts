@@ -7,7 +7,7 @@ import {
     AutoIncrement,
     ForeignKey,
   } from 'sequelize-typescript';
-  import Org from './orgs.model';
+  import { Org } from './orgs.model';
   import { Expose } from 'class-transformer';
   
   @Table({ tableName: 'transports' })
