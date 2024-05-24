@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    return queryInterface.bulkInsert('orgs', [
+    return queryInterface.bulkInsert('organizations', [
       {
         name: 'ООО Ивановы',
         createdAt: new Date(2021, 1, 1),
@@ -22,6 +22,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('orgs', null, {});
+    await queryInterface.bulkDelete('organizations', null, {});
   },
 };

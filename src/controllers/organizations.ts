@@ -76,8 +76,6 @@ class OrgsController {
       const orgsService = new OrgsService();
       const { id } = req.params;
 
-      console.log('id = ' + id);
-
       if (!id) {
         return res.status(400).json({ message: 'bad params' });
       }
