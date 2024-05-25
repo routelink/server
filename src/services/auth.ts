@@ -18,7 +18,7 @@ export class AuthService {
   async generateTokens(
     user: User,
   ): Promise<{ token: string; refreshToken: RefreshToken }> {
-    const token = jwt.sign({ email: user.email, role: user.role_id }, config.jwtSecret, {
+    const token = jwt.sign({ email: user.email, role: user.roleId }, config.jwtSecret, {
       expiresIn: config.accessTokenExpiresIn,
     });
 
