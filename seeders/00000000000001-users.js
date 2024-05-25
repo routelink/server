@@ -8,6 +8,8 @@ module.exports = {
       {
         name: 'admin',
         username: 'admin',
+        role_id: 1,
+        organization_id: 1,
         email: 'admin@routelink.ru',
         password: await hash('admin', 10),
         createdAt: new Date(),

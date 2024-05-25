@@ -1,24 +1,23 @@
 'use strict';
-
-// Генерация 20 строк данных
-
-const { hash } = require('bcrypt');
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    return queryInterface.bulkInsert('roles', [
+    return queryInterface.bulkInsert('types', [
       {
         name: 'Администратор',
+        image: 'admin.png',
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
         name: 'Водитель',
+        image: 'admin.png',
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        name: 'Аналитик',
+        name: 'Test',
+        image: 'admin.png',
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -26,6 +25,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('roles', null, {});
+    await queryInterface.bulkDelete('types', null, {});
   },
 };
