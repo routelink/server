@@ -1,10 +1,10 @@
-import { User, RefreshToken } from '@app/models';
 import { compare } from 'bcrypt';
-import jwt from 'jsonwebtoken';
 import crypto from 'crypto';
-import { config } from '@app/models';
-
+import jwt from 'jsonwebtoken';
 import { FindOptions } from 'sequelize';
+
+import { RefreshToken, User } from '@app/models';
+import { config } from '@app/models';
 
 export class AuthService {
   async compare(data: string | Buffer, encrypted: string): Promise<boolean> {
@@ -18,7 +18,7 @@ export class AuthService {
   async generateTokens(
     user: User,
   ): Promise<{ token: string; refreshToken: RefreshToken }> {
-    const token = jwt.sign({ email: user.email }, config.jwtSecret, {
+    const token = jwt.sign({ email: user.email, role: user.role_id }, config.jwtSecret, {
       expiresIn: config.accessTokenExpiresIn,
     });
 

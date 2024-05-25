@@ -1,5 +1,7 @@
+import { NextFunction, Request, Response } from 'express';
 import { JsonWebTokenError, TokenExpiredError } from 'jsonwebtoken';
 import passport from 'passport';
+import { Strategy } from 'passport';
 import {
   ExtractJwt,
   Strategy as JWTStrategy,
@@ -7,12 +9,10 @@ import {
   VerifiedCallback,
 } from 'passport-jwt';
 
-import { Strategy } from 'passport';
+import { error } from '@app/middlewares';
 import { config } from '@app/models';
 import { User } from '@app/models';
-import { Request, Response, NextFunction } from 'express';
 import { AUTH } from '@app/models';
-import { error } from '@app/middlewares';
 import { UserService } from '@app/services';
 
 export class Auth {
