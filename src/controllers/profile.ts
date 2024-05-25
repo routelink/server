@@ -12,7 +12,7 @@ class ProfileController {
       if (!user) {
         res.status(404);
       }
-      return user;
+      return res.json(user);
     } catch (e) {
       next(e);
     }
