@@ -1,5 +1,6 @@
-import { IConfig } from './config';
 import dotenv from 'dotenv';
+
+import { IConfig } from './config';
 
 dotenv.config();
 dotenv.config({ path: `.env.local`, override: true });

@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
+
 import { TransportService } from '@app/services/transport';
 import { GetTransportsPayload, ITransport } from '@app/types';
 

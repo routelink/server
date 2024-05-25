@@ -1,14 +1,15 @@
-import express from 'express';
-import morgan from 'morgan';
-import helmet from 'helmet';
-import cors from 'cors';
 import bodyParser from 'body-parser';
-import { config } from '@app/models';
-import routes from '@app/routes';
-import { Auth, Syntax, error, notFound } from '@app/middlewares';
-import { sequelize } from '@app/models';
-import { Server } from 'socket.io';
+import cors from 'cors';
+import express from 'express';
+import helmet from 'helmet';
 import * as http from 'http';
+import morgan from 'morgan';
+import { Server } from 'socket.io';
+
+import { Auth, Syntax, error, notFound } from '@app/middlewares';
+import { config } from '@app/models';
+import { sequelize } from '@app/models';
+import routes from '@app/routes';
 import { WsService } from '@app/services';
 
 export default class App {

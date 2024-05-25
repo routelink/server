@@ -1,4 +1,5 @@
 import { Router } from 'express';
+
 import { transportsController } from '@app/controllers';
 import { Validation } from '@app/middlewares';
 import { Transport } from '@app/models';

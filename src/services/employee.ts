@@ -1,6 +1,6 @@
-import { Employee } from '@app/models/employee.model';
-
 import { FindOptions } from 'sequelize';
+
+import { Employee } from '@app/models/employee.model';
 
 export class EmployeesService {
   async getCollection(options?: FindOptions): Promise<Employee[]> {
@@ -14,9 +14,10 @@ export class EmployeesService {
   async create(data: any): Promise<[Employee, boolean]> {
     const { name, surname, roleId, transportId } = data;
     const [employee, created] = await Employee.findOrCreate({
-      where: { 
+      where: {
         surname: surname,
-        name: name},
+        name: name,
+      },
       defaults: { name, surname, roleId, transportId },
     });
     return [employee, created] as [Employee, boolean];
