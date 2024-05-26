@@ -1,4 +1,5 @@
 import { Sequelize } from 'sequelize-typescript';
+
 import { config } from '@app/models';
 
 export const sequelize = new Sequelize(config.dbUri, {

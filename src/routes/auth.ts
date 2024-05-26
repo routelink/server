@@ -1,7 +1,8 @@
 import { Router } from 'express';
+
 import { authController } from '@app/controllers';
-import { Credentials } from '@app/models';
 import { Auth, Validation } from '@app/middlewares';
+import { Credentials } from '@app/models';
 
 const router = Router();
 const auth = new Auth();

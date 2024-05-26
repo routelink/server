@@ -2,13 +2,17 @@ import { hash } from 'bcrypt';
 import { FindOptions } from 'sequelize';
 import { Json } from 'sequelize/types/utils';
 
-import { User } from '@app/models';
+import { Organization, Role, User } from '@app/models';
 
 import { AuthService } from './auth';
 
 export class UserService {
   async getCollection(options?: FindOptions): Promise<User[]> {
-    return await User.findAll({ ...options });
+    return await User.findAll({
+      ...options,
+      include: [Role, Organization],
+      attributes: { exclude: ['password'] },
+    });
   }
 
   async getItem(options: FindOptions): Promise<User | null> {

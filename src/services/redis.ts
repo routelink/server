@@ -1,4 +1,5 @@
 import { Redis } from 'ioredis';
+
 import { ICache } from '@app/models';
 
 export class RedisAdapter implements ICache {

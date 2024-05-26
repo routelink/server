@@ -47,15 +47,19 @@ export class User extends Model {
   createdAt!: Date;
 
   @ForeignKey(() => Organization)
-  @Column(DataType.INTEGER)
-  org_id!: number;
+  @Column({ field: 'organization_id', type: DataType.INTEGER })
+  organizationId?: number;
 
   @BelongsTo(() => Organization)
-  org!: Organization;
+  organization!: Organization;
 
+  @Exclude()
   @ForeignKey(() => Role)
-  @Column(DataType.INTEGER)
-  role_id!: number;
+  @Column({ field: 'role_id', type: DataType.INTEGER })
+  roleId!: number;
+
+  @BelongsTo(() => Role)
+  role!: Role;
 
   @HasMany(() => RefreshToken)
   refreshTokens!: RefreshToken[];

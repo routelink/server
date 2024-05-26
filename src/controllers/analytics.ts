@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
-import { fn, col } from 'sequelize';
+import { col, fn } from 'sequelize';
+
 import { Insure } from '@app/models';
 
 export const getTransportWithUserCount = async (_req: Request, res: Response) => {

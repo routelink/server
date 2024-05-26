@@ -1,12 +1,14 @@
-'use strict';
-
-// Генерация 20 строк данных
-
+('use strict');
 const { hash } = require('bcrypt');
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
     return queryInterface.bulkInsert('roles', [
+      {
+        name: 'Администратор платформы',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
       {
         name: 'Администратор',
         createdAt: new Date(),

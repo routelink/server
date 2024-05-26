@@ -1,4 +1,5 @@
 import { Server, Socket } from 'socket.io';
+
 import { MetricsWsService } from '@app/services/websockets';
 
 export class WsService {

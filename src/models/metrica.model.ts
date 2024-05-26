@@ -24,11 +24,11 @@ export class Metrica extends Model {
   createdAt!: Date;
 
   @ForeignKey(() => Transport)
-  @Column(DataType.INTEGER)
+  @Column({ field: 'transport_id', type: DataType.INTEGER })
   transportId!: number;
 
   @ForeignKey(() => User)
-  @Column(DataType.INTEGER)
+  @Column({ field: 'user_id', type: DataType.INTEGER })
   userId!: number;
 
   @Column(DataType.JSON)

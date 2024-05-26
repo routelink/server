@@ -1,4 +1,5 @@
 import { Router } from 'express';
+
 import { employeesController } from '@app/controllers/employees';
 
 const routeEmployees = Router();

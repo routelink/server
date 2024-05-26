@@ -2,10 +2,13 @@ import {
   AutoIncrement,
   Column,
   DataType,
+  HasMany,
   Model,
   PrimaryKey,
   Table,
 } from 'sequelize-typescript';
+
+import { Transport } from './transport.model';
 
 @Table({ tableName: 'types' })
 export class Type extends Model {
@@ -19,4 +22,7 @@ export class Type extends Model {
 
   @Column(DataType.STRING)
   image!: string;
+
+  @HasMany(() => Transport)
+  transports!: Transport[];
 }
