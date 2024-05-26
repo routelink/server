@@ -29,7 +29,7 @@ COPY --from=builder /app/dist ./
 
 RUN set -eux; \
     npm i -g pm2; \
-    npm ci --only=production --ignore-scripts
+    npm ci --only=production
 
 EXPOSE 80
 
