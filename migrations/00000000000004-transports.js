@@ -13,11 +13,21 @@ module.exports = {
       name: {
         type: Sequelize.STRING,
       },
-      orgId: {
+      organization_id: {
+        allowNull: true,
         type: Sequelize.INTEGER,
+        references: {
+          model: 'organizations',
+          key: 'id',
+        },
       },
-      typeId: {
+      type_id: {
+        allowNull: true,
         type: Sequelize.INTEGER,
+        references: {
+          model: 'types',
+          key: 'id',
+        },
       },
       regNumber: {
         type: Sequelize.STRING,

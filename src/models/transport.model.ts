@@ -1,5 +1,6 @@
 import {
   AutoIncrement,
+  BelongsTo,
   Column,
   DataType,
   ForeignKey,
@@ -22,12 +23,18 @@ export class Transport extends Model {
   name!: string;
 
   @ForeignKey(() => Organization)
-  @Column(DataType.INTEGER)
-  orgId!: number;
+  @Column({ field: 'organization_id', type: DataType.INTEGER })
+  organizationId!: number;
+
+  @BelongsTo(() => Organization)
+  organization!: Organization;
 
   @ForeignKey(() => Type)
-  @Column(DataType.INTEGER)
+  @Column({ field: 'type_id', type: DataType.INTEGER })
   typeId!: number;
+
+  @BelongsTo(() => Type)
+  type!: Type;
 
   @Column(DataType.STRING)
   regNumber!: string;

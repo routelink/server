@@ -1,6 +1,7 @@
-import { beforeEach, describe, expect, test } from 'vitest';
-import App from './app';
 import request from 'supertest';
+import { beforeEach, describe, expect, test } from 'vitest';
+
+import App from './app';
 
 describe('app', () => {
   let app: App;

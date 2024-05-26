@@ -2,10 +2,13 @@ import {
   AutoIncrement,
   Column,
   DataType,
+  HasMany,
   Model,
   PrimaryKey,
   Table,
 } from 'sequelize-typescript';
+
+import User from './user.model';
 
 @Table({ tableName: 'organizations' })
 export class Organization extends Model {
@@ -16,4 +19,7 @@ export class Organization extends Model {
 
   @Column(DataType.STRING)
   name!: string;
+
+  @HasMany(() => User)
+  users!: User[];
 }

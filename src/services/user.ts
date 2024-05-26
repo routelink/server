@@ -1,12 +1,18 @@
-import { User } from '@app/models';
 import { hash } from 'bcrypt';
 import { FindOptions } from 'sequelize';
-import { AuthService } from './auth';
 import { Json } from 'sequelize/types/utils';
+
+import { Organization, Role, User } from '@app/models';
+
+import { AuthService } from './auth';
 
 export class UserService {
   async getCollection(options?: FindOptions): Promise<User[]> {
-    return await User.findAll(options);
+    return await User.findAll({
+      ...options,
+      include: [Role, Organization],
+      attributes: { exclude: ['password'] },
+    });
   }
 
   async getItem(options: FindOptions): Promise<User | null> {
@@ -46,6 +52,10 @@ export class UserService {
   }
 
   async remove(id: string): Promise<number> {
+    const user = await User.findOne({ where: { id: id } });
+    if (!user) {
+      throw new Error('User not found');
+    }
     return await User.destroy({ where: { id: id } });
   }
 }
