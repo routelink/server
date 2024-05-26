@@ -23,7 +23,6 @@ export class User extends Model {
   @PrimaryKey
   @AutoIncrement
   @Expose({ groups: ['read'] })
-  @Exclude()
   @Column(DataType.INTEGER)
   id!: number;
 
