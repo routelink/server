@@ -23,9 +23,17 @@ export class TransportService {
     return items;
   }
 
-  async addTransport(payload: ITransport) {
+  async addItem(payload: ITransport) {
     // @ts-ignore
-    const newTransport = await Transport.create(payload.dataValues);
-    return newTransport.dataValues;
+    const newTransport = await Transport.create(payload);
+    return newTransport;
+  }
+
+  async deleteItem(id: ITransport['id']) {
+    await Transport.destroy({
+      where: {
+        id: id,
+      },
+    });
   }
 }
