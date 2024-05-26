@@ -25,6 +25,7 @@ export class TransportService {
 
   async addTransport(payload: ITransport) {
     // @ts-ignore
-    await Transport.create(payload);
+    const newTransport = await Transport.create(payload.dataValues);
+    return newTransport.dataValues;
   }
 }
