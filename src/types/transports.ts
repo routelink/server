@@ -2,12 +2,11 @@ import { IMetaContext } from '@app/types/base';
 
 export interface ITransport extends IMetaContext {
   name: string;
-  type: number;
+  typeId: number;
   regNumber?: string;
   avgConsumption?: number;
-  organisation?: number;
+  orgId?: number;
   unit?: string;
-  mileage?: string;
 }
 export type GetTransportsPayload = {
   page: number;

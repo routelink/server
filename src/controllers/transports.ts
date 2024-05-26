@@ -49,9 +49,10 @@ class TransportsController {
   async add(req: RequestWithBody<ITransport>, res: Response, next: NextFunction) {
     try {
       const transportService = new TransportService();
-      await transportService.addTransport(req.body);
-      res.status(200).json({ response: 'ok' });
+      const newTransport = await transportService.addTransport(req.body);
+      res.status(200).json({ ...newTransport });
     } catch (e) {
+      console.log(e);
       next(e);
       //res.status(401).json({ status: AUTH.REFRESH_ERROR, message: 'Error refresh token' });
     }

@@ -7,6 +7,6 @@ import { Transport } from '@app/models';
 const router = Router();
 router.route('/types').get(transportsController.getTransportTypes);
 router.route('/items').post(transportsController.items);
-router.route('/addTransport').post(Validation.req(Transport), transportsController.add);
+router.route('/add').post(Validation.req(Transport), transportsController.add);
 
 export default router;
