@@ -1,10 +1,11 @@
 import { NextFunction, Request, Response } from 'express';
 
 import { User } from '@app/models';
-import { UserService } from '@app/services';
+//import { UserService } from '@app/services';
+import { ProfileService } from '@app/services';
 
 class ProfileController {
-  async getProfile(req: Request, res: Response, next: NextFunction) {
+  /*  async getProfile(req: Request, res: Response, next: NextFunction) {
     try {
       const { id } = req.user as { id: number };
       const userService = new UserService();
@@ -27,7 +28,42 @@ class ProfileController {
       next(e);
     }
   }
+} */
+  async getProfile(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.user as { id: number };
+      const profileService = new ProfileService();
+      const user: User | null = await profileService.getProfile(id);
+      if (!user) {
+        res.status(404);
+      }
+      return res.json(user);
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  async changeUserName(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.user as { id: number };
+      const profileService = new ProfileService();
+      return res.json(await profileService.changeUserName(id, req.body));
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  async changePassword(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.user as { id: number };
+      const userService = new ProfileService();
+      return res.json(await userService.changePassword(id, req.body));
+    } catch (e) {
+      next(e);
+    }
+  }
 }
+
 const profileController = new ProfileController();
 
 export { profileController };
