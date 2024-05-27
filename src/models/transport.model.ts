@@ -4,6 +4,7 @@ import {
   Column,
   DataType,
   ForeignKey,
+  HasMany,
   Model,
   PrimaryKey,
   Table,
@@ -11,6 +12,7 @@ import {
 
 import { Organization } from './organization.model';
 import { Type } from './type.model';
+import User from './user.model';
 
 @Table({ tableName: 'transports' })
 export class Transport extends Model {
@@ -44,4 +46,7 @@ export class Transport extends Model {
 
   @Column(DataType.STRING)
   unit!: string;
+
+  @HasMany(() => User)
+  user?: User;
 }

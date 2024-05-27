@@ -17,6 +17,7 @@ import { Metrica } from './metrica.model';
 import { Organization } from './organization.model';
 import { RefreshToken } from './refresh-token.model';
 import { Role } from './role.model';
+import { Transport } from './transport.model';
 
 @Table({ tableName: 'users' })
 export class User extends Model {
@@ -62,6 +63,15 @@ export class User extends Model {
   @BelongsTo(() => Role)
   @Expose({ groups: ['read'] })
   role!: Role;
+
+  @Exclude()
+  @ForeignKey(() => Transport)
+  @Column({ field: 'transport_id', type: DataType.INTEGER })
+  transportId!: number;
+
+  @BelongsTo(() => Transport)
+  @Expose({ groups: ['read'] })
+  transport!: Transport;
 
   @HasMany(() => RefreshToken)
   refreshTokens!: RefreshToken[];

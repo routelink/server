@@ -40,6 +40,13 @@ module.exports = {
           key: 'id',
         },
       },
+      transport_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'transports',
+          key: 'id',
+        },
+      },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
