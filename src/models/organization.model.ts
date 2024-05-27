@@ -1,3 +1,4 @@
+import { Expose } from 'class-transformer';
 import {
   AutoIncrement,
   Column,
@@ -15,9 +16,11 @@ export class Organization extends Model {
   @PrimaryKey
   @AutoIncrement
   @Column(DataType.INTEGER)
+  @Expose({ groups: ['read'] })
   id!: number;
 
   @Column(DataType.STRING)
+  @Expose({ groups: ['read', 'write'] })
   name!: string;
 
   @HasMany(() => User)

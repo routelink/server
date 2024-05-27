@@ -11,7 +11,6 @@ export class UserService {
     return await User.findAll({
       ...options,
       include: [Role, Organization],
-      attributes: { exclude: ['password'] },
     });
   }
 

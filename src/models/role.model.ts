@@ -16,13 +16,14 @@ import User from './user.model';
 export class Role extends Model {
   @PrimaryKey
   @AutoIncrement
-  @Expose()
   @Column(DataType.INTEGER)
+  @Expose({ groups: ['read'] })
   id!: number;
 
   @Expose()
   @IsNotEmpty()
   @Column(DataType.STRING)
+  @Expose({ groups: ['read'] })
   name!: string;
 
   @HasMany(() => User)
