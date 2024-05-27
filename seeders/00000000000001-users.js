@@ -40,6 +40,15 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      {
+        username: 'test',
+        role_id: 3,
+        organization_id: 3,
+        email: 'test@routelink.ru',
+        password: await hash('test', 10),
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
     ]);
   },
 
