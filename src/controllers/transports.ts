@@ -8,6 +8,16 @@ type RequestWithBody<T> = Request<{}, {}, T>;
 // type RequestWithParams<T> = Request<T>
 
 class TransportsController {
+  async getTransportTypes(_: Request, res: Response, next: NextFunction) {
+    try {
+      const transportService = new TransportService();
+      const rows = await transportService.getTypes();
+      res.json(rows);
+    } catch (e) {
+      next(e);
+    }
+  }
+
   async items(
     req: RequestWithBody<GetTransportsPayload>,
     res: Response,
@@ -23,14 +33,27 @@ class TransportsController {
     }
   }
 
-  async add(req: RequestWithBody<ITransport>, res: Response, next: NextFunction) {
+  async addItem(req: RequestWithBody<ITransport>, res: Response, next: NextFunction) {
     try {
       const transportService = new TransportService();
-      await transportService.addTransport(req.body);
-      res.status(200).json({ response: 'ok' });
+      const newTransport = await transportService.addItem(req.body);
+      res.status(200).json(newTransport);
     } catch (e) {
       next(e);
-      //res.status(401).json({ status: AUTH.REFRESH_ERROR, message: 'Error refresh token' });
+    }
+  }
+
+  async deleteItem(
+    req: RequestWithBody<Pick<ITransport, 'id'>>,
+    res: Response,
+    next: NextFunction,
+  ) {
+    try {
+      const transportService = new TransportService();
+      await transportService.deleteItem(req.body.id);
+      res.json({ message: 'Transport deleted' });
+    } catch (e) {
+      next(e);
     }
   }
 }

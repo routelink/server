@@ -5,7 +5,9 @@ import { Validation } from '@app/middlewares';
 import { Transport } from '@app/models';
 
 const router = Router();
-router.route('/items').post(transportsController.items);
-router.route('/addTransport').post(Validation.req(Transport), transportsController.add);
+router.route('/types').get(transportsController.getTransportTypes);
+router.route('/').post(transportsController.items);
+router.route('/').post(Validation.req(Transport), transportsController.addItem);
+router.route('/').delete(Validation.req(Transport), transportsController.deleteItem);
 
 export default router;
