@@ -15,26 +15,34 @@ export class UserService {
   }
 
   async getItem(options: FindOptions): Promise<User | null> {
-    return await User.findOne(options);
+    return await User.findOne({
+      ...options,
+      include: [Role, Organization],
+    });
   }
 
   async getItemById(id: number): Promise<User | null> {
-    return await User.findOne({ where: { id: id } });
+    return await User.findOne({
+      where: { id: id },
+      include: [Role, Organization],
+    });
   }
 
-  async create(data: any): Promise<[User, boolean]> {
+  async create(data: User): Promise<User> {
     const { email, password } = data;
     const hashedPassword = await hash(password, 10);
-    const [user, created] = await User.findOrCreate({
+    data.set('password', hashedPassword);
+    const [user, _created] = await User.findOrCreate({
       where: { email: email },
-      defaults: { ...data, email, password: hashedPassword },
+      defaults: data.get({ plain: true }),
+      include: [Role, Organization],
     });
-    return [user, created] as [User, boolean];
+    return user;
   }
 
-  async update(id: string | number, options: any): Promise<User | null | Json> {
+  async update(id: number, options: any): Promise<User | null | Json> {
     const { password, currentPassword } = options;
-    const user: User | null = await User.findOne({ where: { id: id } });
+    const user: User | null = await this.getItemById(id);
     if (!user) {
       throw new Error('User not found');
     }
@@ -47,10 +55,10 @@ export class UserService {
       }
     }
     await User.update({ ...options }, { where: { id: id } });
-    return await User.findOne({ where: { id: id } });
+    return await this.getItemById(id);
   }
 
-  async remove(id: string): Promise<number> {
+  async remove(id: number): Promise<number> {
     const user = await User.findOne({ where: { id: id } });
     if (!user) {
       throw new Error('User not found');

@@ -30,7 +30,7 @@ class UsersController {
   async create(req: Request, res: Response, next: NextFunction) {
     try {
       const userService = new UserService();
-      const user = await userService.create(req.body);
+      const user = await userService.create(req.body as User);
       return res.json(user);
     } catch (e) {
       next(e);
@@ -40,7 +40,7 @@ class UsersController {
     try {
       const userService = new UserService();
       const { id } = req.params;
-      const user = await userService.update(id, req.body);
+      const user = await userService.update(Number(id), req.body as User);
       return res.json(user);
     } catch (e) {
       next(e);
@@ -51,7 +51,7 @@ class UsersController {
     try {
       const userService = new UserService();
       const { id } = req.params;
-      const user = await userService.remove(id);
+      const user = await userService.remove(Number(id));
       return res.json(user);
     } catch (e) {
       next(e);

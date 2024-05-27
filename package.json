@@ -13,7 +13,9 @@
     "prettier": "prettier -w .",
     "prepare": "husky || true",
     "db:migrate": "sequelize db:migrate --models-path=src/models",
-    "db:fixtures": "sequelize db:seed:all --models-path=src/models"
+    "db:fixtures": "sequelize db:seed:all --models-path=src/models",
+    "db:drop": "sequelize db:drop --models-path=src/models",
+    "db:create": "sequelize db:create --models-path=src/models"
   },
   "keywords": [],
   "author": "",

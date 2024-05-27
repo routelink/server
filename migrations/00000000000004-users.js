@@ -9,14 +9,12 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      name: {
-        type: Sequelize.STRING,
-      },
       username: {
         type: Sequelize.STRING,
       },
       email: {
         type: Sequelize.STRING,
+        unique: true,
       },
       password: {
         type: Sequelize.STRING,
@@ -37,13 +35,6 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: {
           model: 'roles',
-          key: 'id',
-        },
-      },
-      transport_id: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'transports',
           key: 'id',
         },
       },

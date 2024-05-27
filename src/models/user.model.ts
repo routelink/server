@@ -11,6 +11,7 @@ import {
   Model,
   PrimaryKey,
   Table,
+  Unique,
 } from 'sequelize-typescript';
 
 import { Metrica } from './metrica.model';
@@ -28,10 +29,11 @@ export class User extends Model {
   id!: number;
 
   @Expose()
-  @IsNotEmpty()
+  @IsNotEmpty({ groups: ['write'] })
   @Column(DataType.STRING)
   username!: string;
 
+  @Unique(true)
   @Expose()
   @IsNotEmpty()
   @Column({ type: DataType.STRING, unique: true })
@@ -55,7 +57,6 @@ export class User extends Model {
   @Expose({ groups: ['read'] })
   organization!: Organization;
 
-  @Exclude()
   @ForeignKey(() => Role)
   @Column({ field: 'role_id', type: DataType.INTEGER })
   roleId!: number;
@@ -64,7 +65,6 @@ export class User extends Model {
   @Expose({ groups: ['read'] })
   role!: Role;
 
-  @Exclude()
   @ForeignKey(() => Transport)
   @Column({ field: 'transport_id', type: DataType.INTEGER })
   transportId!: number;
