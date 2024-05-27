@@ -51,6 +51,7 @@ export class User extends Model {
   organizationId?: number;
 
   @BelongsTo(() => Organization)
+  @Expose({ groups: ['read'] })
   organization!: Organization;
 
   @Exclude()
@@ -59,6 +60,7 @@ export class User extends Model {
   roleId!: number;
 
   @BelongsTo(() => Role)
+  @Expose({ groups: ['read'] })
   role!: Role;
 
   @HasMany(() => RefreshToken)
