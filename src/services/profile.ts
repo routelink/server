@@ -17,7 +17,7 @@ export class ProfileService {
       include: [Role, Organization],
       attributes: { exclude: ['password'] },
     });
-    await cacheService.set('UserId-' + id, JSON.stringify(profile), 60);
+    await cacheService.set('UserId-' + id, JSON.stringify(profile), 600);
     return profile;
   }
 

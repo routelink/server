@@ -24,7 +24,7 @@ export default class App {
     }),
   );
   corsOptions = {
-    origin: ['https://routelink.ru', 'http://localhost:3000', 'http://192.168.0.20'],
+    origin: ['https://routelink.ru', 'http://localhost:3000'],
     credentials: true,
   };
 
