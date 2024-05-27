@@ -1,5 +1,6 @@
 import {
   AutoIncrement,
+  BelongsTo,
   Column,
   CreatedAt,
   DataType,
@@ -26,6 +27,9 @@ export class Metrica extends Model {
   @ForeignKey(() => Transport)
   @Column({ field: 'transport_id', type: DataType.INTEGER })
   transportId!: number;
+
+  @BelongsTo(() => Transport)
+  transport!: Transport;
 
   @ForeignKey(() => User)
   @Column({ field: 'user_id', type: DataType.INTEGER })
