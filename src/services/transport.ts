@@ -1,4 +1,6 @@
-import { Transport } from '@app/models';
+import { Order } from 'sequelize';
+
+import { Transport, Type } from '@app/models';
 import { GetTransportsPayload, ITransport } from '@app/types';
 
 export class TransportService {
@@ -6,7 +8,7 @@ export class TransportService {
     const limit = options.count || 10;
     const page = options.page || 1;
     const offset = (page - 1) * limit;
-    const order = [];
+    const order: Order = [];
     if (options.sortBy) {
       const sortOrder =
         options.sortOrder && options.sortOrder.toUpperCase() === 'DESC' ? 'DESC' : 'ASC';
@@ -16,24 +18,25 @@ export class TransportService {
     const items = await Transport.findAll({
       limit,
       offset,
-      // @ts-ignore
-      order, // Добавляем порядок сортировки в запрос
+      order,
     });
 
     return items;
   }
 
-  async addItem(payload: ITransport) {
-    // @ts-ignore
-    const newTransport = await Transport.create(payload);
-    return newTransport;
+  async getTypes(): Promise<Type[]> {
+    return await Type.findAll();
   }
 
-  async deleteItem(id: ITransport['id']) {
-    await Transport.destroy({
-      where: {
-        id: id,
-      },
+  async addItem(data: any): Promise<Transport> {
+    const { id } = data;
+    const [item, _created] = await Transport.findOrCreate({
+      where: { id: id },
+      defaults: data.get({ plain: true }),
     });
+    return item;
+  }
+  async deleteItem(id: ITransport['id']): Promise<number> {
+    return await Transport.destroy({ where: { id: id } });
   }
 }
