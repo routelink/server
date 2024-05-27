@@ -6,3 +6,4 @@ export * from './metrics';
 export * from './cache';
 export * from './redis';
 export * from './websockets';
+export * from './profile';
