@@ -17,7 +17,7 @@ export class ProfileService {
       include: [Role, Organization],
       attributes: { exclude: ['password'] },
     });
-    await cacheService.set('UserId-' + id, JSON.stringify(profile), 600);
+    await cacheService.set('UserId-' + id, JSON.stringify(profile), 60);
     return profile;
   }
 
@@ -28,8 +28,12 @@ export class ProfileService {
       throw new Error('User not found');
     }
     await cacheService.del('UserId-' + id);
-    const updated = await User.update({ username: username }, { where: { id: id } });
-    return updated;
+    await User.update({ username: username }, { where: { id: id } });
+    return await User.findOne({
+      where: { id: id },
+      include: [Role, Organization],
+      attributes: { exclude: ['password'] },
+    });
   }
 
   async changePassword(
