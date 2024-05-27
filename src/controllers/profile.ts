@@ -22,8 +22,8 @@ class ProfileController {
     try {
       const { id } = req.user as { id: number };
       const profileService = new ProfileService();
-      await profileService.changeUsername(id, req.body);
-      return res.json({ message: 'Username update successfuly' });
+      const user = await profileService.changeUsername(id, req.body);
+      return res.json(user);
     } catch (e) {
       next(e);
     }
