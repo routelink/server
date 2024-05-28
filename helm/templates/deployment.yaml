@@ -46,10 +46,6 @@ spec:
             {{- toYaml .Values.readinessProbe | nindent 12 }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-          volumeMounts:
-            - name: nginx-config
-              mountPath: /etc/nginx/conf.d
-              readOnly: true
           env:
             - name: POSTGRES_DB
               valueFrom:
@@ -86,7 +82,3 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.secrets.redis }}
                   key: password
-      volumes:
-        - name: nginx-config
-          configMap:
-            name: {{ include "helm.fullname" . }}
