@@ -25,7 +25,7 @@ WORKDIR /app
 
 COPY --from=builder /app/package.json /app/package-lock.json ./
 
-COPY --from=builder /app/dist ./
+COPY --from=builder /app/.env /app/dist ./
 
 RUN set -eux; \
     npm i -g pm2; \
