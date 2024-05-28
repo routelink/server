@@ -40,7 +40,7 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.secret }}
                   key: postgres
-          command: ["npm", "run", "db:migrate"]
+          command: ["npm", "run", "db:migrate", "--", "--url", "$POSTGRES_URI"]
       containers:
         - name: {{ .Chart.Name }}
           securityContext:

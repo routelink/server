@@ -11,7 +11,8 @@ export const config: IConfig = {
   jwtSecret: process.env.JWT_SECRET || 'your_secret_key',
   accessTokenExpiresIn: process.env.JWT_ACCESSTOKEN_TTL || '15m',
   refreshTokenExpiresIn: process.env.JWT_REFRESHTOKEN_TTL || '7d',
-  dbUri: process.env.DBURI || 'postgres://routelink:routelink@localhost:5432/routelink',
+  dbUri:
+    process.env.POSTGRES_URI || 'postgres://routelink:routelink@localhost:5432/routelink',
   cookie: {
     name: 'refresh_token',
     enabled: true,
