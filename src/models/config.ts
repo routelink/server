@@ -14,7 +14,10 @@ export interface Cookie {
 export interface IConfig {
   host: string;
   port: number;
-  dbUri: string;
+  database: string;
+  username: string;
+  password: string;
+  dbhost: string;
   jwtSecret: string;
   accessTokenExpiresIn: string;
   refreshTokenExpiresIn: string;

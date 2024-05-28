@@ -107,4 +107,6 @@ tolerations: []
 
 affinity: {}
 
-secret: routelink-secret
+secrets:
+  postgres: routelink-secret-postgres
+  redis: routelink-secret-redis

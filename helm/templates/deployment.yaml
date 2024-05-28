@@ -30,17 +30,6 @@ spec:
       serviceAccountName: {{ include "helm.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
-      initContainers:
-        - name: init-db-migration
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
-          env:
-            - name: POSTGRES_URI
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.secret }}
-                  key: postgres
-          command: ["npm", "run", "db:migrate", "--", "--url", "$POSTGRES_URI"]
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
@@ -62,16 +51,41 @@ spec:
               mountPath: /etc/nginx/conf.d
               readOnly: true
           env:
-            - name: POSTGRES_URI
+            - name: POSTGRES_DB
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.secret }}
-                  key: postgres
-            - name: REDIS_URI
+                  name: {{ .Values.secrets.postgres }}
+                  key: database
+            - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.secret }}
-                  key: redis
+                  name: {{ .Values.secrets.postgres }}
+                  key: username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secrets.postgres }}
+                  key: password
+            - name: POSTGRES_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secrets.postgres }}
+                  key: host
+            - name: REDIS_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secrets.redis }}
+                  key: host
+            - name: REDIS_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secrets.redis }}
+                  key: port
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secrets.redis }}
+                  key: password
       volumes:
         - name: nginx-config
           configMap:

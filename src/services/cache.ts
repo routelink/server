@@ -7,6 +7,7 @@ import { RedisAdapter } from './redis';
 const options: RedisOptions = {
   host: process.env.REDIS_HOST || 'localhost',
   port: +process.env.REDIS_PORT! || 6379,
+  password: process.env.REDIS_PASSWORD,
 };
 export const cacheService = new AbstractCacheService(
   new RedisAdapter(new Redis(options)),
