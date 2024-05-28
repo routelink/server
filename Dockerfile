@@ -24,8 +24,11 @@ ENV NODE_ENV=production
 WORKDIR /app
 
 COPY --from=builder /app/package.json /app/package-lock.json ./
-
-COPY --from=builder /app/.env /app/dist ./
+COPY --from=builder /app/config ./config
+COPY --from=builder /app/migrations ./migrations
+COPY --from=builder /app/seeders ./seeders
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/.env /app/.sequelizerc ./
 
 RUN set -eux; \
     npm i -g pm2; \
@@ -37,4 +40,4 @@ HEALTHCHECK CMD curl --fail http://localhost/healthz || exit 1
 
 ENTRYPOINT ["pm2-runtime"]
 
-CMD ["index.js"]
+CMD ["dist/index.js"]
