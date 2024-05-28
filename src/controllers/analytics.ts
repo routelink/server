@@ -1,18 +1,57 @@
-import { Request, Response } from 'express';
-import { col, fn } from 'sequelize';
+import { NextFunction, Request, Response } from 'express';
 
-import { Insure } from '@app/models';
+import { FuelService, InsureService, ServiceService } from '@app/services/analytics';
 
-export const getTransportWithUserCount = async (_req: Request, res: Response) => {
-  try {
-    const result = await Insure.findAll({
-      where: { isUser: true },
-      attributes: ['transportId', [fn('COUNT', col('id')), 'userCount']],
-      group: ['transportId'],
-    });
+class InsureController {
+  async getInsure(_req: Request, res: Response, next: NextFunction) {
+    try {
+      const insureService = new InsureService();
+      const insure = await insureService.findAll();
 
-    res.json(result);
-  } catch (error) {
-    res.status(500).json({ error: 'Something went wrong' });
+      if (!insure || insure.length === 0) {
+        return res.status(400).json({ message: `not found any insures` });
+      }
+      return res.status(200).json({ message: `insures: ${insure}` });
+    } catch (error) {
+      next(error);
+    }
   }
-};
+}
+
+class ServiceController {
+  async getService(_req: Request, res: Response, next: NextFunction) {
+    try {
+      const serviceService = new ServiceService();
+      const service = await serviceService.findAll();
+
+      if (!service || service.length === 0) {
+        return res.status(400).json({ message: `not found any services` });
+      }
+      return res.status(200).json({ message: `insures: ${service}` });
+    } catch (error) {
+      next(error);
+    }
+  }
+}
+
+class FuelController {
+  async getFuel(_req: Request, res: Response, next: NextFunction) {
+    try {
+      const fuelService = new FuelService();
+      const fuel = await fuelService.findAll();
+
+      if (!fuel || fuel.length === 0) {
+        return res.status(400).json({ message: `not found any fuel` });
+      }
+      return res.status(200).json({ message: `insures: ${fuel}` });
+    } catch (error) {
+      next(error);
+    }
+  }
+}
+
+const insureController = new InsureController();
+const serviceController = new ServiceController();
+const fuelController = new FuelController();
+
+export { insureController, serviceController, fuelController };

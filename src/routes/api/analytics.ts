@@ -1,9 +1,11 @@
 import { Router } from 'express';
 
-import { getTransportWithUserCount } from '@app/controllers';
+import { fuelController, insureController, serviceController } from '@app/controllers';
 
-const router = Router();
+const routerAnalytics = Router();
 
-router.get('/insures/user-count', getTransportWithUserCount);
+routerAnalytics.get('/insures', insureController.getInsure);
+routerAnalytics.get('/service', serviceController.getService);
+routerAnalytics.get('/fuel', fuelController.getFuel);
 
-export default router;
+export default routerAnalytics;
