@@ -38,7 +38,7 @@ spec:
             - name: POSTGRES_URI
               valueFrom:
                 secretKeyRef:
-                  name: routelink-secret
+                  name: {{ .Values.secret }}
                   key: postgres
           command: ["npm", "run", "db:migrate"]
       containers:
