@@ -35,20 +35,11 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
-            - name: POSTGRES_HOST
-              value: {{ .Values.postgres.host }}
-            - name: POSTGRES_PORT
-              value: {{ .Values.postgres.port }}
-            - name: POSTGRES_USER
-              value: {{ .Values.postgres.user }}
-            - name: POSTGRES_PASSWORD
-              value: {{ .Values.postgres.password }}
-            - name: POSTGRES_DB
-              value: {{ .Values.postgres.db }}
-            - name: REDIS_HOST
-              value: {{ .Values.redis.host }}
-            - name: REDIS_PORT
-              value: {{ .Values.redis.port }}
+            - name: POSTGRES_URI
+              valueFrom:
+                secretKeyRef:
+                  name: routelink-secret
+                  key: postgres
           command: ["npm", "run", "db:migrate"]
       containers:
         - name: {{ .Chart.Name }}
@@ -71,20 +62,16 @@ spec:
               mountPath: /etc/nginx/conf.d
               readOnly: true
           env:
-            - name: POSTGRES_HOST
-              value: {{ .Values.postgres.host }}
-            - name: POSTGRES_PORT
-              value: {{ .Values.postgres.port }}
-            - name: POSTGRES_USER
-              value: {{ .Values.postgres.user }}
-            - name: POSTGRES_PASSWORD
-              value: {{ .Values.postgres.password }}
-            - name: POSTGRES_DB
-              value: {{ .Values.postgres.db }}
-            - name: REDIS_HOST
-              value: {{ .Values.redis.host }}
-            - name: REDIS_PORT
-              value: {{ .Values.redis.port }}
+            - name: POSTGRES_URI
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secret }}
+                  key: postgres
+            - name: REDIS_URI
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secret }}
+                  key: redis
       volumes:
         - name: nginx-config
           configMap:

@@ -107,12 +107,4 @@ tolerations: []
 
 affinity: {}
 
-postgres:
-  host: localhost
-  port: 5432
-  user: app
-  password: app
-  db: app
-redis:
-  host: localhost
-  port: 6379
+secret: routelink-secret
