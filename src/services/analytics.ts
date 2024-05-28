@@ -1,10 +1,9 @@
-import { Sequelize, col, fn, literal } from 'sequelize';
+import { Sequelize, fn, literal } from 'sequelize';
 
 import { Metrica } from '@app/models';
 import { Insure } from '@app/models/insures.model';
 import { Service } from '@app/models/service.model';
 import { Transport } from '@app/models/transport.model';
-import { Type } from '@app/models/type.model';
 
 export class InsureService {
   async findAll(): Promise<Insure[]> {
@@ -20,41 +19,9 @@ export class InsureService {
 }
 
 export class ServiceService {
-  async findAll(): Promise<Service[]> {
+  async findAll(): Promise<any[]> {
     return await Service.findAll({
-      attributes: [
-        'transportId',
-        [fn('MAX', col('createdAt')), 'maxCreatedAt'],
-        [
-          literal(`(
-            SELECT length
-            FROM services AS s2
-            WHERE s2.transport_id = Service.transport_id
-            ORDER BY created_at DESC
-            LIMIT 1
-          )`),
-          'length',
-        ],
-      ],
-      include: [
-        {
-          model: Transport,
-          attributes: ['id', 'name'],
-          include: [
-            {
-              model: Type,
-              attributes: ['name'],
-            },
-          ],
-        },
-      ],
-      group: [
-        'Service.transport_id',
-        'Transport.id',
-        'Transport.name',
-        'Transport->Type.id',
-        'Transport->Type.name',
-      ],
+      attributes: ['transport_id', 'createdAt', 'length'],
     });
   }
 }

@@ -4,7 +4,7 @@ import { fuelController, insureController, serviceController } from '@app/contro
 
 const routerAnalytics = Router();
 
-routerAnalytics.get('/insures', insureController.getInsure);
+routerAnalytics.get('/insure', insureController.getInsure);
 routerAnalytics.get('/service', serviceController.getService);
 routerAnalytics.get('/fuel', fuelController.getFuel);
 
