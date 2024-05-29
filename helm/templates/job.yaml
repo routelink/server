@@ -13,7 +13,7 @@ spec:
       - name: migrate
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
-        command: ["npm", "run", "db:migrate"]
+        command: ["npm", "run", "db:migrate", "&&", "npm", "run", "db:fixtures"]
         env:
           - name: POSTGRES_DB
             valueFrom:

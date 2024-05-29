@@ -5,6 +5,7 @@ module.exports = {
     database: 'routelink',
     host: '127.0.0.1',
     dialect: 'postgres',
+    seederStorage: 'sequelize',
   },
   test: {
     username: 'routelink',
@@ -19,5 +20,6 @@ module.exports = {
     database: process.env.POSTGRES_DB,
     host: process.env.POSTGRES_HOST,
     dialect: 'postgres',
+    seederStorage: 'sequelize',
   },
 };
