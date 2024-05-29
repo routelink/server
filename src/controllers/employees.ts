@@ -118,11 +118,11 @@ class EmployeesController {
   async remove(req: Request, res: Response, next: NextFunction) {
     try {
       const employeeService = new EmployeesService();
-      const { id } = req.user as { id: number };
+      const { id } = req.params;
       if (!id) {
         return res.status(400).json({ message: `bad params (id=${id})` });
       }
-      return res.json(await employeeService.remove(id));
+      return res.json(await employeeService.remove(Number(id)));
     } catch (e) {
       next(e);
     }
