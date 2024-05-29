@@ -10,6 +10,9 @@ router.route('/').get(transportsController.items);
 router
   .route('/')
   .post(Validation.req(Transport, ['write']), transportsController.addItem);
+router
+  .route('/edit/:id')
+  .post(Validation.req(Transport, ['write']), transportsController.editItem);
 router.route('/:id').delete(Validation.req(Transport), transportsController.deleteItem);
 
 export default router;
