@@ -8,6 +8,8 @@ const router = Router();
 router.route('/types').get(transportsController.getTransportTypes);
 router.route('/').get(transportsController.items);
 router.route('/').post(Validation.req(Transport), transportsController.addItem);
-router.route('/').delete(Validation.req(Transport), transportsController.deleteItem);
+router
+  .route('/:id')
+  .delete(Validation.req(Transport, ['write']), transportsController.deleteItem);
 
 export default router;
