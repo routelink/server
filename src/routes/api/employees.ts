@@ -1,13 +1,20 @@
 import { Router } from 'express';
 
 import { employeesController } from '@app/controllers/employees';
+import { Validation } from '@app/middlewares';
+import { User } from '@app/models';
 
 const routeEmployees = Router();
 
-routeEmployees.get('/', employeesController.list);
-routeEmployees.get('/:id', employeesController.get);
+routeEmployees.get(
+  '/',
+  Validation.res(User, ['read']),
+  employeesController.getCollection,
+);
+routeEmployees.get('/free', employeesController.getFreeCollection);
+routeEmployees.get('/:id', Validation.res(User, ['read']), employeesController.getItem);
 routeEmployees.delete('/:id', employeesController.remove);
 routeEmployees.patch('/', employeesController.update);
-routeEmployees.post('/', employeesController.create);
+routeEmployees.post('', employeesController.create);
 
 export default routeEmployees;
