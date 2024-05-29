@@ -20,9 +20,6 @@ export class Type extends Model {
   @Column(DataType.STRING)
   name!: string;
 
-  @Column(DataType.STRING)
-  image!: string;
-
   @HasMany(() => Transport)
   transports!: Transport[];
 }

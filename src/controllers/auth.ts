@@ -148,6 +148,24 @@ class AuthController {
       next(e);
     }
   }
+  async registration(req: Request, res: Response, next: NextFunction) {
+    try {
+      if (req.body.password !== req.body.password2) {
+        return res.status(400).json({ message: 'Пароли не совпадают' });
+      }
+      if (!/\S+@\S+\.\S+/.test(req.body.email))
+        return res.status(400).json({ message: 'Email некорректен' });
+      const userService = new UserService();
+      const [user, created] = await userService.create(req.body);
+      if (created) return res.json(user);
+      else
+        return res
+          .status(400)
+          .json({ message: 'Пользователь с таким email уже существует' });
+    } catch (e) {
+      next(e);
+    }
+  }
 }
 
 const authController = new AuthController();

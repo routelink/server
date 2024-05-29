@@ -4,20 +4,20 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     return queryInterface.bulkInsert('types', [
       {
-        name: 'Администратор',
-        image: 'admin.png',
+        id: 1,
+        name: 'Легковушка',
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        name: 'Водитель',
-        image: 'admin.png',
+        id: 2,
+        name: 'Грузовик',
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
+        id: 3,
         name: 'Test',
-        image: 'admin.png',
         createdAt: new Date(),
         updatedAt: new Date(),
       },
