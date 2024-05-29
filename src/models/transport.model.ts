@@ -20,7 +20,7 @@ export class Transport extends Model {
   @PrimaryKey
   @AutoIncrement
   @Column(DataType.INTEGER)
-  @Expose({ groups: ['read', 'write'] })
+  @Expose({ groups: ['read'] })
   id!: number;
 
   @Column(DataType.STRING)
