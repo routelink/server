@@ -13,10 +13,10 @@ module.exports = {
         type: Sequelize.STRING,
       },
       length: {
-        type: Sequelize.NUMBER,
+        type: Sequelize.INTEGER,
       },
       sum: {
-        type: Sequelize.NUMBER,
+        type: Sequelize.INTEGER,
       },
       transport_id: {
         type: Sequelize.INTEGER,
