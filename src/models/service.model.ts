@@ -26,16 +26,6 @@ export class Service extends Model {
   @Expose({ groups: ['read'] })
   description!: string;
 
-  @CreatedAt
-  @Expose()
-  @Column(DataType.DATE)
-  createdAt!: Date;
-
-  @CreatedAt
-  @Expose()
-  @Column(DataType.DATE)
-  updatedAt!: Date;
-
   @IsNotEmpty()
   @Column(DataType.INTEGER)
   @Expose({ groups: ['read'] })
@@ -53,5 +43,15 @@ export class Service extends Model {
   @BelongsTo(() => Transport)
   @Expose({ groups: ['read'] })
   transport!: Transport;
+
+  @CreatedAt
+  @Expose()
+  @Column(DataType.DATE)
+  createdAt!: Date;
+
+  @CreatedAt
+  @Expose()
+  @Column(DataType.DATE)
+  updatedAt!: Date;
 }
 export default Service;
