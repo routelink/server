@@ -36,6 +36,14 @@ export class TransportService {
     });
     return item;
   }
+  async editItem(data: any, id: number) {
+    delete data.dataValues.id;
+
+    await Transport.update(data.get({ plain: true }), { where: { id: id } });
+
+    return await Transport.findOne({ where: { id: id } });
+  }
+
   async deleteItem(id: ITransport['id']): Promise<number> {
     return await Transport.destroy({ where: { id: id } });
   }

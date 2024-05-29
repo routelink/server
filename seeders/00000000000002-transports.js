@@ -1,6 +1,12 @@
 ('use strict');
 const { fakerRU: faker } = require('@faker-js/faker');
+function generateRegNumber() {
+  const letters = 'АВЕКМНОРСТУХ';
+  const randomLetters = () => letters[Math.floor(Math.random() * letters.length)];
+  const randomDigits = () => Math.floor(Math.random() * 10);
 
+  return `${randomLetters()}${randomDigits()}${randomDigits()}${randomDigits()}${randomLetters()}${randomLetters()}77`;
+}
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -11,7 +17,7 @@ module.exports = {
         organization_id: faker.number.int({ min: 1, max: 50 }),
         type_id: faker.number.int({ min: 1, max: 3 }),
         avgConsumption: faker.number.int({ min: 1, max: 14 }),
-        regNumber: faker.vehicle.vrm(),
+        regNumber: generateRegNumber(),
         unit: 'L',
         createdAt: new Date(),
         updatedAt: new Date(),

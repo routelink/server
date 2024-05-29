@@ -42,6 +42,19 @@ class TransportsController {
       next(e);
     }
   }
+  async editItem(req: any, res: Response, next: NextFunction) {
+    try {
+      const transportService = new TransportService();
+      console.log(req.body, req.params.id);
+      const newTransport = await transportService.editItem(
+        req.body,
+        Number(req.params.id),
+      );
+      res.status(200).json(newTransport);
+    } catch (e) {
+      next(e);
+    }
+  }
 
   async deleteItem(req: any, res: Response, next: NextFunction) {
     try {
