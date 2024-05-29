@@ -24,7 +24,7 @@ export class Transport extends Model {
   id!: number;
 
   @Column(DataType.STRING)
-  @Expose({ groups: ['read'] })
+  @Expose({ groups: ['read', 'write'] })
   name!: string;
 
   @ForeignKey(() => Organization)
@@ -42,7 +42,7 @@ export class Transport extends Model {
   type!: Type;
 
   @Column(DataType.STRING)
-  @Expose({ groups: ['read'] })
+  @Expose({ groups: ['read', 'write'] })
   regNumber!: string;
 
   @Column(DataType.INTEGER)
