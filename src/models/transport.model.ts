@@ -1,3 +1,4 @@
+import { Expose } from 'class-transformer';
 import {
   AutoIncrement,
   BelongsTo,
@@ -19,9 +20,11 @@ export class Transport extends Model {
   @PrimaryKey
   @AutoIncrement
   @Column(DataType.INTEGER)
+  @Expose({ groups: ['read'] })
   id!: number;
 
   @Column(DataType.STRING)
+  @Expose({ groups: ['read'] })
   name!: string;
 
   @ForeignKey(() => Organization)
@@ -39,6 +42,7 @@ export class Transport extends Model {
   type!: Type;
 
   @Column(DataType.STRING)
+  @Expose({ groups: ['read'] })
   regNumber!: string;
 
   @Column(DataType.INTEGER)

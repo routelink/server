@@ -2,7 +2,7 @@ import { hash } from 'bcrypt';
 import { FindOptions } from 'sequelize';
 import { Json } from 'sequelize/types/utils';
 
-import { Organization, Role, User } from '@app/models';
+import { Organization, Role, Transport, User } from '@app/models';
 
 import { AuthService } from './auth';
 
@@ -10,7 +10,7 @@ export class UserService {
   async getCollection(options?: FindOptions): Promise<User[]> {
     return await User.findAll({
       ...options,
-      include: [Role, Organization],
+      include: [Role, Organization, Transport],
     });
   }
 

@@ -1,24 +1,49 @@
 import { NextFunction, Request, Response } from 'express';
 
-// import { Employee } from '@app/models';
+import { UserService } from '@app/services';
 import { EmployeesService } from '@app/services/employee';
 
 class EmployeesController {
-  async list(_: Request, res: Response, next: NextFunction) {
+  async getCollection(req: Request, res: Response, next: NextFunction) {
     try {
       const employeeService = new EmployeesService();
-      const employee = await employeeService.getCollection();
+      const { id } = req.user as { id: number };
+      const usersService = new UserService();
+      const user = await usersService.getItemById(id);
+
+      if (!user?.organizationId) {
+        return res.status(400).json({ message: 'Organization not found for this user' });
+      }
+
+      const employee = await employeeService.getCollection({
+        organizationId: user.organizationId,
+      });
 
       if (!employee) {
         return res.status(400).json({ message: `not found any employees` });
       }
-      return res.status(200).json({ message: `employees: ${employee}` });
+      return res.status(200).json(employee);
     } catch (e) {
       next(e);
     }
   }
 
-  async get(req: Request, res: Response, next: NextFunction) {
+  async getFreeCollection(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.user as { id: number };
+      const employeesService = new EmployeesService();
+      const usersService = new UserService();
+      const user = await usersService.getItemById(id);
+      if (!user?.organizationId) {
+        return res.status(400).json({ message: 'Organization not found for this user' });
+      }
+      return res.json(await employeesService.getFreeCollection());
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  async getItem(req: Request, res: Response, next: NextFunction) {
     try {
       const employeeService = new EmployeesService();
       const { id } = req.params;
@@ -32,7 +57,7 @@ class EmployeesController {
         return res.status(400).json({ message: `not found by id = ${id}` });
       }
 
-      return res.status(200).json({ message: `employee with id ${id} is ${employee}` });
+      return res.status(200).json(employee);
     } catch (e) {
       next(e);
     }
@@ -42,15 +67,24 @@ class EmployeesController {
     try {
       const employeeService = new EmployeesService();
 
-      const { name, surname, roleId, transportId } = req.body;
-      if (!name || !surname || roleId) {
-        return res.status(400).json({ message: 'bad params' });
+      const { userId, roleId, transportId } = req.body;
+      if (!userId || !roleId || (roleId === 3 && !transportId)) {
+        return res.status(400).json({
+          message: ` bad params userId : ${userId} , roleId : ${roleId} , transportId : ${transportId}`,
+        });
       }
 
+      const { id } = req.user as { id: number };
+      const usersService = new UserService();
+      const user = await usersService.getItemById(id);
+
+      if (!user?.organizationId) {
+        return res.status(400).json({ message: 'Organization not found for this user' });
+      }
       const employee = await employeeService.create({
-        name: name,
-        surname: surname,
+        userId: userId,
         roleId: roleId,
+        organizationId: user.organizationId,
         transportId: transportId,
       });
       return res.json(employee);
@@ -84,15 +118,11 @@ class EmployeesController {
   async remove(req: Request, res: Response, next: NextFunction) {
     try {
       const employeeService = new EmployeesService();
-      const { id } = req.params;
-
-      // console.log(`check id = ${id}`)
-
+      const { id } = req.user as { id: number };
       if (!id) {
         return res.status(400).json({ message: `bad params (id=${id})` });
       }
-      employeeService.remove(id);
-      return res.status(200).json({ message: `employee ${id} removed` });
+      return res.json(await employeeService.remove(id));
     } catch (e) {
       next(e);
     }
