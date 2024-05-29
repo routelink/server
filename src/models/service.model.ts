@@ -18,11 +18,12 @@ import { Transport } from './transport.model';
 export class Service extends Model {
   @PrimaryKey
   @AutoIncrement
-  @Expose()
+  @Expose({ groups: ['read'] })
   @Column(DataType.INTEGER)
   id!: number;
 
   @Column(DataType.TEXT)
+  @Expose({ groups: ['read'] })
   description!: string;
 
   @CreatedAt
@@ -30,12 +31,19 @@ export class Service extends Model {
   @Column(DataType.DATE)
   createdAt!: Date;
 
+  @CreatedAt
+  @Expose()
+  @Column(DataType.DATE)
+  updatedAt!: Date;
+
   @IsNotEmpty()
   @Column(DataType.INTEGER)
+  @Expose({ groups: ['read'] })
   length!: number;
 
   @IsNotEmpty()
   @Column(DataType.INTEGER)
+  @Expose({ groups: ['read'] })
   sum!: number;
 
   @ForeignKey(() => Transport)
@@ -43,6 +51,7 @@ export class Service extends Model {
   transport_id!: number;
 
   @BelongsTo(() => Transport)
+  @Expose({ groups: ['read'] })
   transport!: Transport;
 }
 export default Service;
