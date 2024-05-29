@@ -30,8 +30,12 @@ class UsersController {
   async create(req: Request, res: Response, next: NextFunction) {
     try {
       const userService = new UserService();
-      const user = await userService.create(req.body as User);
-      return res.json(user);
+      const [user, created] = await userService.create(req.body as User);
+      if (created) return res.json(user);
+      else
+        return res
+          .status(400)
+          .json({ message: 'Пользователь с таким email уже существует' });
     } catch (e) {
       next(e);
     }
