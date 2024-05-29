@@ -1,6 +1,8 @@
 'use strict';
 
 require('dotenv').config();
+require('dotenv').config({ path: `.env.local`, override: true });
+
 const path = require('path');
 module.exports = {
   config: path.resolve('config', 'config.js'),
