@@ -28,16 +28,18 @@ export class UserService {
     });
   }
 
-  async create(data: User): Promise<User> {
+  async create(data: User): Promise<[User, boolean]> {
     const { email, password } = data;
     const hashedPassword = await hash(password, 10);
     data.set('password', hashedPassword);
-    const [user, _created] = await User.findOrCreate({
+    return await User.findOrCreate({
       where: { email: email },
-      defaults: data.get({ plain: true }),
+      defaults: {
+        ...data.get({ plain: true }),
+        roleId: 3,
+      },
       include: [Role, Organization],
     });
-    return user;
   }
 
   async update(id: number, options: any): Promise<User | null | Json> {
