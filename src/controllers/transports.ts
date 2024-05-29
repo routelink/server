@@ -43,14 +43,10 @@ class TransportsController {
     }
   }
 
-  async deleteItem(
-    req: RequestWithBody<Pick<ITransport, 'id'>>,
-    res: Response,
-    next: NextFunction,
-  ) {
+  async deleteItem(req: any, res: Response, next: NextFunction) {
     try {
       const transportService = new TransportService();
-      await transportService.deleteItem(req.body.id);
+      await transportService.deleteItem(req.params.id);
       res.json({ message: 'Transport deleted' });
     } catch (e) {
       next(e);
