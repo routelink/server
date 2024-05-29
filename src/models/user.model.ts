@@ -51,7 +51,7 @@ export class User extends Model {
 
   @ForeignKey(() => Organization)
   @Column({ field: 'organization_id', type: DataType.INTEGER })
-  organizationId?: number;
+  organizationId!: number;
 
   @BelongsTo(() => Organization)
   @Expose({ groups: ['read'] })

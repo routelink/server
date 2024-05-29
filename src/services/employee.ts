@@ -1,26 +1,67 @@
-import { FindOptions } from 'sequelize';
+import { FindOptions, Op } from 'sequelize';
 
+import { Organization, Role, Transport, User } from '@app/models';
 import { Employee } from '@app/models/employee.model';
 
 export class EmployeesService {
-  async getCollection(options?: FindOptions): Promise<Employee[]> {
-    return await Employee.findAll(options);
-  }
-
-  async getItem(id: String): Promise<Employee | null> {
-    return await Employee.findOne({ where: { id: id } });
-  }
-
-  async create(data: any): Promise<[Employee, boolean]> {
-    const { name, surname, roleId, transportId } = data;
-    const [employee, created] = await Employee.findOrCreate({
+  async getCollection(options?: FindOptions['where']): Promise<User[]> {
+    return await User.findAll({
+      include: [Role, Organization, Transport],
       where: {
-        surname: surname,
-        name: name,
+        roleId: {
+          [Op.not]: [1, 2],
+        },
+        ...options,
       },
-      defaults: { name, surname, roleId, transportId },
     });
-    return [employee, created] as [Employee, boolean];
+  }
+  async getFreeCollection(): Promise<User[]> {
+    const res = await User.findAll({
+      include: [Role, Organization, Transport],
+      where: {
+        [Op.or]: [{ organizationId: { [Op.eq]: null } }],
+        roleId: {
+          [Op.not]: [1, 2],
+        },
+      },
+    });
+
+    console.log(res.map((i) => i.organizationId));
+    return res;
+  }
+
+  async getItem(id: number | string): Promise<User | null> {
+    return await User.findOne({
+      include: [Role, Organization, Transport],
+      where: {
+        id: id,
+      },
+    });
+  }
+
+  async create(data: {
+    userId: number;
+    roleId: number;
+    organizationId: number;
+    transportId?: number;
+  }) {
+    if (data.roleId === 3 && !data.transportId) {
+      throw new Error('bad params');
+    }
+
+    await User.update(
+      {
+        roleId: data.roleId,
+        organizationId: data.organizationId,
+        transportId: data.transportId,
+      },
+      {
+        where: {
+          id: data.userId,
+        },
+      },
+    );
+    return await User.findOne({ where: { id: data.userId } });
   }
 
   async update(id: string, data: any) {
@@ -43,7 +84,7 @@ export class EmployeesService {
     return updated;
   }
 
-  async remove(id: string): Promise<number> {
-    return await Employee.destroy({ where: { id: id } });
+  async remove(id: number) {
+    return await User.update({ organizationId: null }, { where: { id: id } });
   }
 }
