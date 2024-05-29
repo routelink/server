@@ -46,16 +46,17 @@ module.exports = {
       },
     );
 
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 500; i++) {
       const fake_email = `${faker.internet.email()}`;
       const fake_role_id = faker.number.int({ min: 1, max: 3 });
       users.push({
         username: `${faker.person.fullName()}`,
         role_id: fake_role_id,
-        organization_id: faker.number.int({ min: 1, max: 50 }),
+        organization_id:
+          fake_role_id === 1 ? null : faker.number.int({ min: 1, max: 50 }),
         email: fake_email,
         password: await hash(`${fake_email.split('@')[0]}`, 10),
-        transport_id: fake_role_id === 3 ? faker.number.int({ min: 0, max: 50 }) : null,
+        transport_id: fake_role_id === 3 ? faker.number.int({ min: 1, max: 50 }) : null,
         createdAt: new Date(),
         updatedAt: new Date(),
       });
