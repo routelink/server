@@ -9,7 +9,7 @@ import users from './users';
 
 const router = Router();
 
-router.use('/transport', transport);
+router.use('/transports', transport);
 router.use('/profile', profile);
 router.use('/organizations', roueteOrgs);
 router.use('/analytics', analyticsRoutes);
