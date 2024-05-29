@@ -55,7 +55,12 @@ export class UserService {
       } else {
         throw new Error('Invalid current password');
       }
+    } else {
+      if (password) {
+        options.password = await hash(password, 10);
+      }
     }
+
     await User.update({ ...options }, { where: { id: id } });
     return await this.getItemById(id);
   }
