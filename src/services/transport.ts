@@ -38,7 +38,7 @@ export class TransportService {
     return item;
   }
   async editItem(data: any, id: number) {
-    
+    data.id = id;
     await Transport.update(data.get({ plain: true }), { where: { id: id } });
 
     return await Transport.findOne({ where: { id: id } });
