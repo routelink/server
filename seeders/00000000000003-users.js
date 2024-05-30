@@ -32,6 +32,7 @@ module.exports = {
         organization_id: 2,
         email: 'driver@routelink.ru',
         password: await hash('driver', 10),
+        transport_id: 1,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -56,7 +57,7 @@ module.exports = {
           fake_role_id === 1 ? null : faker.number.int({ min: 1, max: 50 }),
         email: fake_email,
         password: await hash(`${fake_email.split('@')[0]}`, 10),
-        transport_id: fake_role_id === 3 ? faker.number.int({ min: 1, max: 50 }) : null,
+        transport_id: fake_role_id === 3 ? faker.number.int({ min: 2, max: 50 }) : null,
         createdAt: new Date(),
         updatedAt: new Date(),
       });
