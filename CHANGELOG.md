@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.1](https://github.com/routelink/server/compare/v1.1.0...v1.1.1) (2024-05-30)
+
+
+### Bug Fixes
+
+* `refresh_tokens` constraint ([#65](https://github.com/routelink/server/issues/65)) ([cf78c60](https://github.com/routelink/server/commit/cf78c6061587e04ef2be1c1b67b1f484dc6b9cb9))
+* add new migration ([#64](https://github.com/routelink/server/issues/64)) ([dbf60eb](https://github.com/routelink/server/commit/dbf60ebad985f361ab6774206e868d0407b287b7))
+* add new migrations ([9f69041](https://github.com/routelink/server/commit/9f69041e3a21466fa22c99504378554dfefdb28c))
+* transport search fix ([#66](https://github.com/routelink/server/issues/66)) ([325b822](https://github.com/routelink/server/commit/325b8227cf88988b80710e0e2e30b0ce0ebeda76))
+* users update ([#62](https://github.com/routelink/server/issues/62)) ([9d96a59](https://github.com/routelink/server/commit/9d96a59c1117189aaee2610b85d728eb26035094))
+
 ## [1.1.0](https://github.com/routelink/server/compare/v1.0.0...v1.1.0) (2024-05-30)
 
 
