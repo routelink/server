@@ -4,7 +4,6 @@ import { Json } from 'sequelize/types/utils';
 
 import { Organization, Role, Transport, User } from '@app/models';
 
-import { AuthService } from './auth';
 
 export class UserService {
   async getCollection(options?: FindOptions): Promise<User[]> {
@@ -42,26 +41,13 @@ export class UserService {
     });
   }
 
-  async update(id: number, options: any): Promise<User | null | Json> {
-    const { password, currentPassword } = options;
+  async update(id: number, data: User): Promise<User | null | Json> {
     const user: User | null = await this.getItemById(id);
     if (!user) {
       throw new Error('User not found');
     }
-    if (password && currentPassword) {
-      const authService = new AuthService();
-      if (await authService.compare(currentPassword, user.password)) {
-        options.password = await hash(password, 10);
-      } else {
-        throw new Error('Invalid current password');
-      }
-    } else {
-      if (password) {
-        options.password = await hash(password, 10);
-      }
-    }
-
-    await User.update({ ...options }, { where: { id: id } });
+    data.set('id', id);
+    await User.update(data.get({ plain: true }), { where: { id: id } });
     return await this.getItemById(id);
   }
 

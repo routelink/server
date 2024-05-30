@@ -7,8 +7,8 @@ export class Validation {
     return async (req: Request, res: Response, next: NextFunction) => {
       try {
         const object = plainToClass(cls, req.body, { groups });
-        const errors = await validate(object as object);
-
+        const errors = await validate(object as object, { groups, skipMissingProperties: true });
+        console.log(cls, req.body, groups, errors);
         if (errors.length > 0) {
           const validationErrors = this.extractErrorMessages(errors);
           res.status(400).json({ errors: validationErrors });

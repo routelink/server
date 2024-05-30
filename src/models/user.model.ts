@@ -35,7 +35,7 @@ export class User extends Model {
 
   @Unique(true)
   @Expose()
-  @IsNotEmpty()
+  @IsNotEmpty({ groups: ['write'] })
   @Column({ type: DataType.STRING, unique: true })
   email!: string;
 

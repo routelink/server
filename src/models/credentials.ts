@@ -1,9 +1,9 @@
 import { IsNotEmpty } from 'class-validator';
 
 export class Credentials {
-  @IsNotEmpty()
+  @IsNotEmpty({ groups: ['write'] })
   email!: string;
 
-  @IsNotEmpty()
+  @IsNotEmpty({ groups: ['write'] })
   password!: string;
 }
