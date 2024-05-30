@@ -4,6 +4,7 @@ import { Json } from 'sequelize/types/utils';
 
 import { Organization, Role, Transport, User } from '@app/models';
 
+import { cacheService } from './cache';
 
 export class UserService {
   async getCollection(options?: FindOptions): Promise<User[]> {
@@ -48,6 +49,7 @@ export class UserService {
     }
     data.set('id', id);
     await User.update(data.get({ plain: true }), { where: { id: id } });
+    await cacheService.del('UserId-' + id);
     return await this.getItemById(id);
   }
 
