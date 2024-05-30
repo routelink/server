@@ -30,6 +30,7 @@ export class TransportService {
 
   async addItem(data: any): Promise<Transport> {
     const { id } = data;
+    console.log(data);
     const [item, _created] = await Transport.findOrCreate({
       where: { id: id },
       defaults: data.get({ plain: true }),
@@ -37,8 +38,7 @@ export class TransportService {
     return item;
   }
   async editItem(data: any, id: number) {
-    delete data.dataValues.id;
-
+    
     await Transport.update(data.get({ plain: true }), { where: { id: id } });
 
     return await Transport.findOne({ where: { id: id } });

@@ -9,7 +9,7 @@ router.route('/types').get(transportsController.getTransportTypes);
 router.route('/').get(transportsController.items);
 router
   .route('/')
-  .post(Validation.req(Transport, ['write']), transportsController.addItem);
+  .post(Validation.req(Transport), transportsController.addItem);
 router
   .route('/:id')
   .patch(Validation.req(Transport, ['write']), transportsController.editItem);

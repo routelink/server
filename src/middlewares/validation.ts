@@ -6,8 +6,11 @@ export class Validation {
   public static req<T>(cls: new () => T, groups?: string[]) {
     return async (req: Request, res: Response, next: NextFunction) => {
       try {
+        console.log('Incoming data:', req.body);
         const object = plainToClass(cls, req.body, { groups });
-        const errors = await validate(object as object, { groups, skipMissingProperties: true });
+        console.log('Converted object:', object);
+        const errors = await validate(object as object, { groups, skipMissingProperties: true, forbidUnknownValues: false });
+        console.log('Validation errors:', errors);
         if (errors.length > 0) {
           const validationErrors = this.extractErrorMessages(errors);
           res.status(400).json({ errors: validationErrors });
