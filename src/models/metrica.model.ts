@@ -32,7 +32,7 @@ export class Metrica extends Model {
   transport!: Transport;
 
   @ForeignKey(() => User)
-  @Column({ field: 'user_id', type: DataType.INTEGER })
+  @Column({ field: 'id', type: DataType.INTEGER })
   userId!: number;
 
   @Column(DataType.JSON)

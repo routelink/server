@@ -1,6 +1,6 @@
 import { Order } from 'sequelize';
 
-import { Transport, Type } from '@app/models';
+import { Transport, Type, User } from '@app/models';
 import { GetTransportsPayload, ITransport } from '@app/types';
 
 export class TransportService {
@@ -9,6 +9,7 @@ export class TransportService {
     const page = options.page || 1;
     const offset = (page - 1) * limit;
     const order: Order = [];
+    const where: any = {};
     if (options.sortBy) {
       const sortOrder =
         options.sortOrder && options.sortOrder.toUpperCase() === 'DESC' ? 'DESC' : 'ASC';
@@ -19,9 +20,24 @@ export class TransportService {
       limit,
       offset,
       order,
+      where,
+      include: [
+        {
+          model: User,
+          attributes: ['username'],
+        },
+      ],
     });
 
-    return items;
+    // @ts-ignore
+    return items.map((item) => {
+      // @ts-ignore
+      return {
+        ...item.toJSON(),
+        // @ts-ignore
+        username: item.user?.length > 0 ? item?.user[0].username : '',
+      };
+    });
   }
 
   async getTypes(): Promise<Type[]> {

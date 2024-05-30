@@ -1,9 +1,24 @@
 const { hash } = require('bcrypt');
+const { fakerRU: faker } = require('@faker-js/faker');
 
 ('use strict');
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
+    const etc = [];
+    for (let i = 5; i < 50; i++) {
+      etc.push({
+        username: faker.person.fullName(),
+        role_id: 3,
+        organization_id: 2,
+        transport_id: i,
+        email: `driver-${i}@routelink.ru`,
+        password: await hash(`driver-${i}`, 10),
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      });
+    }
+
     return queryInterface.bulkInsert('users', [
       {
         username: 'Администратор платформы',
@@ -17,6 +32,7 @@ module.exports = {
         username: 'Администратор организации',
         role_id: 2,
         organization_id: 1,
+        transport_id: 1,
         email: 'organization@routelink.ru',
         password: await hash('organization', 10),
         createdAt: new Date(),
@@ -26,6 +42,7 @@ module.exports = {
         username: 'Водитель',
         role_id: 3,
         organization_id: 2,
+        transport_id: 2,
         email: 'driver@routelink.ru',
         password: await hash('driver', 10),
         createdAt: new Date(),
@@ -35,6 +52,7 @@ module.exports = {
         username: 'Аналитик',
         role_id: 4,
         organization_id: 3,
+        transport_id: 3,
         email: 'analytic@routelink.ru',
         password: await hash('analytic', 10),
         createdAt: new Date(),
@@ -44,11 +62,13 @@ module.exports = {
         username: 'test',
         role_id: 3,
         organization_id: 3,
+        transport_id: 4,
         email: 'test@routelink.ru',
         password: await hash('test', 10),
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      ...etc,
     ]);
   },
 
