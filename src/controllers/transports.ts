@@ -42,10 +42,9 @@ class TransportsController {
       next(e);
     }
   }
-  async editItem(req: any, res: Response, next: NextFunction) {
+  async editItem(req: Request, res: Response, next: NextFunction) {
     try {
       const transportService = new TransportService();
-      console.log(req.body, req.params.id);
       const newTransport = await transportService.editItem(
         req.body,
         Number(req.params.id),

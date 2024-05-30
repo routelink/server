@@ -24,9 +24,10 @@ export class Transport extends Model {
   id!: number;
 
   @Column(DataType.STRING)
-  @Expose({ groups: ['read', 'write'] })
+  @Expose()
   name!: string;
 
+  @Expose()
   @ForeignKey(() => Organization)
   @Column({ field: 'organization_id', type: DataType.INTEGER })
   organizationId!: number;
@@ -34,6 +35,7 @@ export class Transport extends Model {
   @BelongsTo(() => Organization)
   organization!: Organization;
 
+  @Expose()
   @ForeignKey(() => Type)
   @Column({ field: 'type_id', type: DataType.INTEGER })
   typeId!: number;
@@ -42,12 +44,14 @@ export class Transport extends Model {
   type!: Type;
 
   @Column(DataType.STRING)
-  @Expose({ groups: ['read', 'write'] })
+  @Expose()
   regNumber!: string;
 
   @Column(DataType.INTEGER)
+  @Expose()
   avgConsumption!: number;
 
+  @Expose()
   @Column(DataType.STRING)
   unit!: string;
 

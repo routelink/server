@@ -18,7 +18,7 @@ router.route('/:id').get(Validation.res(User, ['read']), usersController.getItem
 router
   .route('/:id')
   .patch(
-    Validation.req(User, ['write']),
+    Validation.req(User),
     Validation.res(User, ['read']),
     usersController.update,
   );

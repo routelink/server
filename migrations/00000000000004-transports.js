@@ -33,7 +33,7 @@ module.exports = {
         type: Sequelize.STRING,
       },
       avgConsumption: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
       },
       unit: {
         type: Sequelize.STRING,
