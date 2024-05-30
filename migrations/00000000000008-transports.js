@@ -3,7 +3,7 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.changeColumn('transports', 'avgConsumption', {
-      type: Sequelize.NUMBER,
+      type: Sequelize.INTEGER,
     });
   },
   async down(queryInterface, Sequelize) {
