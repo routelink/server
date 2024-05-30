@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
+import { Op } from 'sequelize';
 
 import { FuelService, InsureService, ServiceService } from '@app/services/analytics';
 
@@ -19,15 +20,21 @@ class InsureController {
 }
 
 class ServiceController {
-  async getService(_req: Request, res: Response, next: NextFunction) {
+  async getService(req: Request, res: Response, next: NextFunction) {
     try {
       const serviceService = new ServiceService();
-      const service = await serviceService.findAll();
-
-      if (!service || service.length === 0) {
-        return res.status(400).json({ message: `not found any services` });
-      }
-      return res.status(200).json({ message: `insures: ${service}` });
+      const { beginDate, endDate } = req.query;
+      if (beginDate && endDate) {
+        return res.json(
+          await serviceService.findAll({
+            where: {
+              updatedAt: {
+                [Op.between]: [beginDate, endDate],
+              },
+            },
+          }),
+        );
+      } else return res.json(await serviceService.findAll());
     } catch (error) {
       next(error);
     }
