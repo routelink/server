@@ -15,13 +15,7 @@ router
     usersController.create,
   );
 router.route('/:id').get(Validation.res(User, ['read']), usersController.getItem);
-router
-  .route('/:id')
-  .patch(
-    Validation.req(User, ['write']),
-    Validation.res(User, ['read']),
-    usersController.update,
-  );
+router.route('/:id').patch(Validation.res(User, ['read']), usersController.update);
 router.route('/:id').delete(usersController.delete);
 
 export default router;
