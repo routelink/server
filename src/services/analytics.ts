@@ -1,4 +1,4 @@
-import { Sequelize, fn, literal } from 'sequelize';
+import { FindOptions, Sequelize, fn, literal } from 'sequelize';
 
 import { Metrica } from '@app/models';
 import { Insure } from '@app/models/insures.model';
@@ -19,9 +19,10 @@ export class InsureService {
 }
 
 export class ServiceService {
-  async findAll(): Promise<any[]> {
+  async findAll(options?: FindOptions): Promise<any[]> {
     return await Service.findAll({
-      attributes: ['transport_id', 'createdAt', 'length'],
+      ...options,
+      include: [Transport],
     });
   }
 }
