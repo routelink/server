@@ -11,8 +11,8 @@ router
   .route('/')
   .post(Validation.req(Transport, ['write']), transportsController.addItem);
 router
-  .route('/edit/:id')
-  .post(Validation.req(Transport, ['write']), transportsController.editItem);
+  .route('/:id')
+  .patch(Validation.req(Transport, ['write']), transportsController.editItem);
 router.route('/:id').delete(Validation.req(Transport), transportsController.deleteItem);
 
 export default router;
