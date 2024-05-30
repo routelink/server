@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/routelink/server/compare/v1.0.0...v1.1.0) (2024-05-30)
+
+
+### Features
+
+* edit transport ([#56](https://github.com/routelink/server/issues/56)) ([7205cc9](https://github.com/routelink/server/commit/7205cc97719b310e47974873aab6b186513f9794))
+* fill the table User via faker ([#55](https://github.com/routelink/server/issues/55)) ([0cc87a1](https://github.com/routelink/server/commit/0cc87a11986532b5707f3a0f7978f78497367ea7))
+* improve handler `api/analitycs/services/` ([#57](https://github.com/routelink/server/issues/57)) ([d8baa35](https://github.com/routelink/server/commit/d8baa3505cc38837b853add981dca8bb02f2d77e))
+
+
+### Bug Fixes
+
+* change endpoint to update transport ([f5c5cde](https://github.com/routelink/server/commit/f5c5cde4a7133bc735ed7a4f5969b787eb3b3688))
+* naming seed of users ([07dfd97](https://github.com/routelink/server/commit/07dfd97d12aaa0d49ad6a6c89845cae658f89888))
+* naming seed of users ([c1dd7b0](https://github.com/routelink/server/commit/c1dd7b0441c88245fec8db8eddc6b78c360ee06d))
+* path of models ([1c6e157](https://github.com/routelink/server/commit/1c6e1579baa856a3b2a770aefd665db8210bfc9f))
+* row delete error ([#53](https://github.com/routelink/server/issues/53)) ([54e4253](https://github.com/routelink/server/commit/54e4253975bd0e873e3dfa0280dc1deba3953611))
+* row delete error ([#54](https://github.com/routelink/server/issues/54)) ([d3eab3c](https://github.com/routelink/server/commit/d3eab3c59e19f1e2ee87f0fc203c11995cd7749e))
+
 ## [1.0.0](https://github.com/routelink/server/compare/v0.0.1...v1.0.0) (2024-05-29)
 
 ### Features
