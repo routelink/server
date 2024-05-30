@@ -46,7 +46,7 @@ module.exports = {
       },
     );
 
-    for (let i = 0; i < 500; i++) {
+    for (let i = 0; i < 100; i++) {
       const fake_email = `${faker.internet.email()}`;
       const fake_role_id = faker.number.int({ min: 1, max: 3 });
       users.push({
