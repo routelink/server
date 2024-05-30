@@ -1,4 +1,4 @@
-import { Order } from 'sequelize';
+import { Op, Order } from 'sequelize';
 
 import { Transport, Type } from '@app/models';
 import { GetTransportsPayload, ITransport } from '@app/types';
@@ -9,16 +9,24 @@ export class TransportService {
     const page = options.page || 1;
     const offset = (page - 1) * limit;
     const order: Order = [];
+    const where: any = {};
+    console.log(options.search);
     if (options.sortBy) {
       const sortOrder =
         options.sortOrder && options.sortOrder.toUpperCase() === 'DESC' ? 'DESC' : 'ASC';
       order.push([options.sortBy, sortOrder]);
     }
-
+    if (options.search) {
+      where[Op.or] = [
+        { name: { [Op.iLike]: `%${options.search}%` } },
+        { regNumber: { [Op.iLike]: `%${options.search}%` } },
+      ];
+    }
     const items = await Transport.findAll({
       limit,
       offset,
       order,
+      where,
     });
 
     return items;
