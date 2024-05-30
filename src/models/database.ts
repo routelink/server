@@ -14,7 +14,7 @@ export const sequelize = new Sequelize(
         ? `${__dirname}/models/*.model.{js,ts}`
         : process.env.NODE_ENV === 'production'
           ? `${__dirname}/*.model.js`
-          : `${__dirname}/../models/*.model.ts`,
+          : `${__dirname}/*.model.ts`,
     ],
     modelMatch: (filename, member) => {
       return (
