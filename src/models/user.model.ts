@@ -35,7 +35,7 @@ export class User extends Model {
 
   @Unique(true)
   @Expose()
-  @IsNotEmpty()
+  @IsNotEmpty({ groups: ['write'] })
   @Column({ type: DataType.STRING, unique: true })
   email!: string;
 
@@ -73,7 +73,9 @@ export class User extends Model {
   @Expose({ groups: ['read'] })
   transport!: Transport;
 
-  @HasMany(() => RefreshToken)
+  @HasMany(() => RefreshToken, {
+    onDelete: 'CASCADE',
+  })
   refreshTokens!: RefreshToken[];
 
   @HasMany(() => Metrica)
