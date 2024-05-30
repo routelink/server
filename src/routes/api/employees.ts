@@ -11,7 +11,11 @@ routeEmployees.get(
   Validation.res(User, ['read']),
   employeesController.getCollection,
 );
-routeEmployees.get('/free', employeesController.getFreeCollection);
+routeEmployees.get(
+  '/free',
+  Validation.res(User, ['read']),
+  employeesController.getFreeCollection,
+);
 routeEmployees.get('/:id', Validation.res(User, ['read']), employeesController.getItem);
 routeEmployees.delete('/:id', employeesController.remove);
 routeEmployees.patch('/', employeesController.update);

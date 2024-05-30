@@ -26,7 +26,6 @@ export class EmployeesService {
       },
     });
 
-    console.log(res.map((i) => i.organizationId));
     return res;
   }
 

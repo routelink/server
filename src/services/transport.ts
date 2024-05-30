@@ -1,10 +1,10 @@
 import { Op, Order } from 'sequelize';
 
-import { Transport, Type } from '@app/models';
-import { GetTransportsPayload, ITransport } from '@app/types';
+import { Transport, Type, User } from '@app/models';
+import { ITransport } from '@app/types';
 
 export class TransportService {
-  async getItems(options: GetTransportsPayload): Promise<Transport[]> {
+  async getItems(options: any): Promise<Transport[]> {
     const limit = options.count || 10;
     const page = options.page || 1;
     const offset = (page - 1) * limit;
@@ -27,6 +27,12 @@ export class TransportService {
       offset,
       order,
       where,
+      include: [
+        {
+          model: User,
+          attributes: ['username'],
+        },
+      ],
     });
 
     return items;

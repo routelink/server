@@ -5,7 +5,7 @@ import {
   Column,
   DataType,
   ForeignKey,
-  HasMany,
+  HasOne,
   Model,
   PrimaryKey,
   Table,
@@ -55,6 +55,7 @@ export class Transport extends Model {
   @Column(DataType.STRING)
   unit!: string;
 
-  @HasMany(() => User)
-  user?: User;
+  @Expose()
+  @HasOne(() => User)
+  user!: User;
 }

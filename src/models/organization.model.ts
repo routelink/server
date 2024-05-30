@@ -9,6 +9,7 @@ import {
   Table,
 } from 'sequelize-typescript';
 
+import { Transport } from './transport.model';
 import User from './user.model';
 
 @Table({ tableName: 'organizations' })
@@ -25,4 +26,9 @@ export class Organization extends Model {
 
   @HasMany(() => User)
   users!: User[];
+
+  @HasMany(() => Transport, {
+    onDelete: 'CASCADE',
+  })
+  transports!: Transport[];
 }
