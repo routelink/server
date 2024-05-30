@@ -1,10 +1,14 @@
 const { hash } = require('bcrypt');
 
 ('use strict');
+const { fakerRU: faker } = require('@faker-js/faker');
+const { strict } = require('assert');
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    return queryInterface.bulkInsert('users', [
+    let users = [];
+    users.push(
       {
         username: 'Администратор платформы',
         role_id: 1,
@@ -40,16 +44,24 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
-      {
-        username: 'test',
-        role_id: 3,
-        organization_id: 3,
-        email: 'test@routelink.ru',
-        password: await hash('test', 10),
+    );
+
+    for (let i = 0; i < 100; i++) {
+      const fake_email = `${faker.internet.email()}`;
+      const fake_role_id = faker.number.int({ min: 1, max: 3 });
+      users.push({
+        username: `${faker.person.fullName()}`,
+        role_id: fake_role_id,
+        organization_id:
+          fake_role_id === 1 ? null : faker.number.int({ min: 1, max: 50 }),
+        email: fake_email,
+        password: await hash(`${fake_email.split('@')[0]}`, 10),
+        transport_id: fake_role_id === 3 ? faker.number.int({ min: 1, max: 50 }) : null,
         createdAt: new Date(),
         updatedAt: new Date(),
-      },
-    ]);
+      });
+    }
+    return queryInterface.bulkInsert('users', users);
   },
 
   async down(queryInterface, Sequelize) {
