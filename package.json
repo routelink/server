@@ -79,7 +79,7 @@
     "tsconfig-paths": "^4.2.0",
     "tslib": "^2.6.3",
     "typescript": "^5.5.4",
-    "vitest": "^1.6.0"
+    "vitest": "^2.0.5"
   },
   "commitlint": {
     "extends": [
