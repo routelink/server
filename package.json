@@ -47,7 +47,7 @@
     "socket.io": "^4.7.5"
   },
   "devDependencies": {
-    "@taiga-ui/commitlint-config": "^0.7.5",
+    "@taiga-ui/commitlint-config": "^0.136.6",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@types/bcrypt": "^5.0.2",
     "@types/cookie-parser": "^1.4.7",
